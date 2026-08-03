@@ -10,9 +10,10 @@ export function Header({ locale }: { locale: Locale }) {
   const base = `/${locale}`;
   const nav = [
     { label: t.nav.stocks, href: `${base}/stocks` },
+    { label: locale === "ja" ? "比較" : "Compare", href: `${base}/compare` },
     { label: t.nav.rankings, href: `${base}/rankings` },
-    { label: locale === "ja" ? "業種" : "Industries", href: `${base}/industries` },
-    { label: locale === "ja" ? "テーマ" : "Themes", href: `${base}/themes` },
+    { label: locale === "ja" ? "配当" : "Dividends", href: `${base}/dividends` },
+    { label: locale === "ja" ? "優待" : "Benefits", href: `${base}/benefits` },
     { label: t.nav.earnings, href: `${base}/earnings` },
     { label: t.nav.learn, href: `${base}/learn` },
   ];

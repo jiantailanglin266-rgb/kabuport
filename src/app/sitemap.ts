@@ -7,7 +7,7 @@ import articlesRaw from "@/data/articles.json";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "stocks", "rankings", "industries", "themes", "earnings", "learn", "about"];
+  const staticPaths = ["", "stocks", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "learn", "about"];
   const codes = listAllCodes();
   const slugs = articlesRaw.map((a) => a.slug);
   const industryCodes = listIndustries().map((i) => i.code);

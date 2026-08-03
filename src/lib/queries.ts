@@ -156,3 +156,99 @@ export function listIndustries() {
 export function listThemes() {
   return getProviders().company.listThemes();
 }
+
+// ---- 株主優待データベース ----
+export interface BenefitEntry {
+  summary: StockSummary;
+  requiredInvestment: number | null;
+  benefitYield: number | null;
+  dividendYield: number | null;
+  totalYield: number | null;
+}
+
+export function getBenefitEntries(): BenefitEntry[] {
+  return listStockSummaries()
+    .filter((s) => s.benefit !== undefined)
+    .map((s) => {
+      const b = s.benefit!;
+      const requiredInvestment = m.minInvestment(s.quote.price, b.requiredShares);
+      const benefitYield =
+        b.benefitValue && requiredInvestment && requiredInvestment > 0
+          ? (b.benefitValue / requiredInvestment) * 100
+          : null;
+      const dividendYield = s.valuation?.dividendYield ?? null;
+      return {
+        summary: s,
+        requiredInvestment,
+        benefitYield,
+        dividendYield,
+        totalYield: m.totalYield(dividendYield ?? undefined, benefitYield ?? undefined),
+      };
+    });
+}
+
+// ---- 銘柄比較 ----
+export interface CompareModel {
+  code: string;
+  nameJa: string;
+  nameEn: string;
+  segment: string;
+  industryCode: string;
+  price: number;
+  marketCap: number;
+  per: number | null;
+  pbr: number | null;
+  roe: number | null;
+  yieldPct: number | null;
+  payoutPct: number | null;
+  operatingMargin: number | null;
+  minInvestment: number | null;
+  consecutiveIncrease: number | null;
+  hasBenefit: boolean;
+}
+
+export function getCompareModels(): CompareModel[] {
+  const p = getProviders();
+  return listStockSummaries().map((s) => {
+    const fin = p.company.getFinancials(s.company.code)[0];
+    return {
+      code: s.company.code,
+      nameJa: s.company.nameJa,
+      nameEn: s.company.nameEn,
+      segment: s.company.segment,
+      industryCode: s.company.industryCode,
+      price: s.quote.price,
+      marketCap: s.quote.marketCap,
+      per: s.valuation?.per ?? null,
+      pbr: s.valuation?.pbr ?? null,
+      roe: fin?.roe ?? null,
+      yieldPct: s.valuation?.dividendYield ?? null,
+      payoutPct: s.valuation?.payoutRatio ?? null,
+      operatingMargin: fin?.operatingMargin ?? null,
+      minInvestment: s.minInvestment,
+      consecutiveIncrease: s.dividend?.consecutiveIncreaseYears ?? null,
+      hasBenefit: s.benefit !== undefined,
+    };
+  });
+}
+
+// ---- 配当カレンダー ----
+export interface DividendEntry {
+  summary: StockSummary;
+}
+
+/** 権利確定月ごとにグルーピングした配当予定。予想値であることは表示側で明示。 */
+export function getDividendCalendar(): { month: number; entries: StockSummary[] }[] {
+  const byMonth = new Map<number, StockSummary[]>();
+  for (const s of listStockSummaries()) {
+    const rec = s.dividend?.recordDate;
+    if (!rec) continue;
+    const month = new Date(rec).getUTCMonth() + 1;
+    const arr = byMonth.get(month) ?? [];
+    arr.push(s);
+    byMonth.set(month, arr);
+  }
+  return [...byMonth.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([month, entries]) => ({ month, entries }));
+}

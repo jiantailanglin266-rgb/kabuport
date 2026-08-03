@@ -115,7 +115,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* 優待 + 決算 + 開示 */}
       <div className="grid gap-8 lg:grid-cols-3">
-        <Section title={t.home.benefits} href={`/${loc}/stocks`}>
+        <Section title={t.home.benefits} href={`/${loc}/benefits`}>
           <ul className="space-y-2">
             {benefits.map((s) => (
               <li key={s.company.code}>
