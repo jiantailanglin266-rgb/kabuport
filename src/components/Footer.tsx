@@ -25,6 +25,9 @@ export function Footer({ locale }: { locale: Locale }) {
     { label: locale === "ja" ? "株主優待" : "Benefits", href: `/${locale}/benefits` },
     { label: t.nav.earnings, href: `/${locale}/earnings` },
     { label: t.nav.learn, href: `/${locale}/learn` },
+    { label: locale === "ja" ? "学習ロードマップ" : "Learning paths", href: `/${locale}/paths` },
+    { label: locale === "ja" ? "用語集" : "Glossary", href: `/${locale}/glossary` },
+    { label: locale === "ja" ? "著者・監修者" : "Authors & reviewers", href: `/${locale}/experts` },
   ];
   return (
     <footer className="mt-16 border-t border-line bg-card">

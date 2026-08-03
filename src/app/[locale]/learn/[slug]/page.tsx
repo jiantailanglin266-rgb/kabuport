@@ -11,6 +11,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RiskDisclosure } from "@/components/RiskDisclosure";
 import { JsonLd } from "@/components/JsonLd";
 import articlesRaw from "@/data/articles.json";
+import expertsRaw from "@/data/experts.json";
 
 type Article = (typeof articlesRaw)[number];
 const find = (slug: string): Article | undefined => articlesRaw.find((a) => a.slug === slug);
@@ -85,6 +86,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
           </div>
         </section>
       )}
+
+      {/* 著者・監修者 (E-E-A-T) */}
+      <section className="grid gap-3 sm:grid-cols-2">
+        {[{ id: (a as { authorId?: string }).authorId, role: loc === "ja" ? "著者" : "Author" }, { id: (a as { reviewerId?: string }).reviewerId, role: loc === "ja" ? "監修" : "Reviewer" }]
+          .map(({ id, role }) => {
+            const ex = expertsRaw.find((e) => e.slug === id);
+            if (!ex) return null;
+            return (
+              <Link key={role} href={`/${loc}/experts/${ex.slug}`} className="rounded-2xl border border-line bg-card p-4 hover:border-brand">
+                <div className="text-[11px] uppercase text-muted">{role}</div>
+                <div className="font-semibold text-ink">{pick(loc, ex.name, ex.nameEn)}</div>
+                <div className="text-xs text-brand">{pick(loc, ex.titleJa, ex.titleEn)}</div>
+                <p className="mt-1 line-clamp-2 text-xs text-muted">{pick(loc, ex.bioJa, ex.bioEn)}</p>
+              </Link>
+            );
+          })}
+      </section>
 
       {a.sources && a.sources.length > 0 && (
         <section className="text-xs text-muted">

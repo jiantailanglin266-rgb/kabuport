@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "editorial-team", "name": "KABUPORT 編集部", "nameEn": "KABUPORT Editorial Team", "role": "author",
+    "titleJa": "編集部", "titleEn": "Editorial Team",
+    "bioJa": "日本株の企業情報・指標・制度をわかりやすく整理する編集チーム（デモ）。一次情報の確認と用語の一貫性を重視します。",
+    "bioEn": "Editorial team organizing Japanese equity data and concepts (demo). Focused on primary-source checks and consistent terminology.",
+    "credentialsJa": "本デモではサンプルのプロフィールです。", "credentialsEn": "Sample profile for this demo."
+  },
+  {
+    "slug": "supervisor-sample", "name": "監修者（サンプル）", "nameEn": "Supervisor (Sample)", "role": "reviewer",
+    "titleJa": "ファイナンシャル・プランナー（サンプル）", "titleEn": "Financial Planner (Sample)",
+    "bioJa": "記事の事実確認・表現の適正性を監修する立場（デモ）。特定銘柄の売買推奨は行いません。",
+    "bioEn": "Reviews articles for factual accuracy and appropriate expression (demo). Does not recommend specific securities.",
+    "credentialsJa": "実運用時に実在の監修者情報・保有資格を記載します。", "credentialsEn": "Real reviewer credentials will be shown in production."
+  }
+]

@@ -3,11 +3,14 @@ import { LOCALES } from "@/types";
 import { localizedUrl } from "@/lib/seo";
 import { listAllCodes, listIndustries, listThemes } from "@/lib/queries";
 import articlesRaw from "@/data/articles.json";
+import glossaryRaw from "@/data/glossary.json";
+import pathsRaw from "@/data/learning-paths.json";
+import expertsRaw from "@/data/experts.json";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "stocks", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "learn", "about"];
+  const staticPaths = ["", "stocks", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "learn", "paths", "glossary", "experts", "about"];
   const codes = listAllCodes();
   const slugs = articlesRaw.map((a) => a.slug);
   const industryCodes = listIndustries().map((i) => i.code);
@@ -20,6 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const c of industryCodes) entries.push({ url: localizedUrl(locale, `industries/${c}`), changeFrequency: "weekly", priority: 0.6 });
     for (const s of themeSlugs) entries.push({ url: localizedUrl(locale, `themes/${s}`), changeFrequency: "weekly", priority: 0.6 });
     for (const slug of slugs) entries.push({ url: localizedUrl(locale, `learn/${slug}`), changeFrequency: "monthly", priority: 0.5 });
+    for (const p of pathsRaw) entries.push({ url: localizedUrl(locale, `paths/${p.slug}`), changeFrequency: "monthly", priority: 0.5 });
+    for (const g of glossaryRaw) entries.push({ url: localizedUrl(locale, `glossary/${g.slug}`), changeFrequency: "monthly", priority: 0.5 });
+    for (const e of expertsRaw) entries.push({ url: localizedUrl(locale, `experts/${e.slug}`), changeFrequency: "monthly", priority: 0.4 });
   }
   return entries;
 }

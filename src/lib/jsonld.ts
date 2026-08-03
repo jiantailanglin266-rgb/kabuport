@@ -68,6 +68,46 @@ export function faqLd(items: { q: string; a: string }[]): Json {
   };
 }
 
+export function definedTermLd(term: { term: string; definition: string; slug: string }, setUrl: string): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    name: term.term,
+    description: term.definition,
+    inDefinedTermSet: setUrl,
+  };
+}
+
+export function definedTermSetLd(name: string, url: string, terms: { term: string; definition: string }[]): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    name,
+    url,
+    hasDefinedTerm: terms.map((t) => ({ "@type": "DefinedTerm", name: t.term, description: t.definition })),
+  };
+}
+
+export function personLd(person: { name: string; jobTitle?: string; description?: string; url: string }): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: person.name,
+    jobTitle: person.jobTitle,
+    description: person.description,
+    url: person.url,
+  };
+}
+
+export function itemListLd(name: string, items: { name: string; url: string }[]): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: it.url })),
+  };
+}
+
 /** <script type="application/ld+json"> 用に安全にシリアライズ。 */
 export function jsonLdScript(data: Json | Json[]): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");

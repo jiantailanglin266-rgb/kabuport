@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "beginner-start", "level": "beginner",
+    "titleJa": "はじめての日本株ロードマップ", "titleEn": "Getting Started with Japanese Stocks",
+    "descJa": "新NISAの基礎から主要指標の読み方まで、初心者が順番に学べる入門コース。", "descEn": "From New NISA basics to reading key metrics, a step-by-step beginner path.",
+    "itemSlugs": ["new-nisa-guide", "per-basics", "dividend-yield-basics"]
+  },
+  {
+    "slug": "dividend-investing", "level": "intermediate",
+    "titleJa": "配当・優待で考える長期投資", "titleEn": "Long-term Investing with Dividends & Benefits",
+    "descJa": "配当利回りの見方を起点に、配当・株主優待を活かした長期投資の考え方を学ぶ。", "descEn": "Starting from dividend yield, learn a long-term approach using dividends and shareholder benefits.",
+    "itemSlugs": ["dividend-yield-basics", "per-basics"]
+  }
+]
