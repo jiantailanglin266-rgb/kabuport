@@ -23,6 +23,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { Hero } from "@/components/home/Hero";
 import { MarketOverview } from "@/components/home/MarketOverview";
+import { LiveMarketSection } from "@/components/market/LiveMarketSection";
 import { SectionHeading } from "@/components/home/SectionHeading";
 import { RankingTabs, type RankTab } from "@/components/home/RankingTabs";
 import { QuantScores } from "@/components/home/QuantScores";
@@ -153,7 +154,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         stats={{ stocks: all.length, datapoints: 120, sectors: heatmap.length }}
       />
 
-      {/* ② Market Overview（架空の指数値は表示しない） */}
+      {/* ② Market Overview（公式ウィジェット埋め込み。当サイトは株価を再配信しない） */}
+      <LiveMarketSection locale={loc} />
+
+      {/* 指数の公式サイト導線 + データ接続状況 */}
       <MarketOverview meta={dataset.meta} breadth={null} locale={loc} />
 
       {/* ③ 人気ランキング */}

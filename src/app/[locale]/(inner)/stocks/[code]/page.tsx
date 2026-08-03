@@ -10,6 +10,7 @@ import { VideoCard } from "@/components/video/VideoCard";
 import { RsiGauge, SignalBadge } from "@/components/signals/RsiGauge";
 import { RSI_LOWER, RSI_PERIOD, RSI_UPPER, rsiStateLabel } from "@/lib/rsi";
 import { Sparkline } from "@/components/Sparkline";
+import { TradingViewWidget } from "@/components/market/TradingViewWidget";
 import { getProviders } from "@/lib/providers";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
 import { PriceChange } from "@/components/PriceChange";
@@ -122,6 +123,31 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
           <Row k={loc === "ja" ? "52週高値" : "52w high"} val={formatYen(q.week52High, loc)} />
           <Row k={loc === "ja" ? "52週安値" : "52w low"} val={formatYen(q.week52Low, loc)} />
         </dl>
+      </section>
+
+      {/* 株価チャート（提供元の公式ウィジェット。当サイトは株価を再配信しない） */}
+      <section>
+        <SectionTitle>{loc === "ja" ? "株価チャート" : "Price chart"}</SectionTitle>
+        <TradingViewWidget
+          type="advanced-chart"
+          height={420}
+          label={`${name} ${loc === "ja" ? "の株価チャート（提供: TradingView）" : "price chart (by TradingView)"}`}
+          config={{
+            symbol: `TSE:${code}`,
+            interval: "D",
+            timezone: "Asia/Tokyo",
+            style: "1",
+            hide_side_toolbar: true,
+            allow_symbol_change: false,
+            withdateranges: true,
+            autosize: true,
+          }}
+        />
+        <p className="mt-2 text-[11px] leading-relaxed text-muted">
+          {loc === "ja"
+            ? "チャートは TradingView の公式ウィジェットによる表示です。データのライセンス処理は提供元によるもので、当サイトは株価データを保持・再配信していません。価格には遅延が生じる場合があります。"
+            : "Chart rendered by TradingView's official widget. This site does not store or redistribute price data; prices may be delayed."}
+        </p>
       </section>
 
       {/* テクニカル（RSI） */}

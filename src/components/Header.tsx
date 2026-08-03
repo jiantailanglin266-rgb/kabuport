@@ -5,8 +5,7 @@ import { getDictionary, pick } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileNav } from "./MobileNav";
-import { MarketTicker } from "./MarketTicker";
-import { getDataset } from "@/lib/dataset";
+import { MarketTickerWidget } from "./market/LiveMarketSection";
 
 export interface NavItem {
   label: string;
@@ -41,8 +40,12 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-50">
-      {/* データ状況の帯（架空の指数値は表示しない） */}
-      <MarketTicker meta={getDataset().meta} breadth={null} locale={locale} />
+      {/* 市場ティッカー: 公式ウィジェット（当サイトは株価を再配信しない） */}
+      <div className="hidden border-b border-white/10 bg-navy md:block">
+        <div className="shell">
+          <MarketTickerWidget locale={locale} />
+        </div>
+      </div>
 
       {/* メインバー: 高さ80px / 白背景 */}
       <div className="border-b border-line bg-surface/92 shadow-header backdrop-blur-md">

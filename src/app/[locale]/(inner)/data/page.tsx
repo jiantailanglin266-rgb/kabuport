@@ -137,6 +137,36 @@ export default async function DataPolicyPage({ params }: { params: Promise<{ loc
         </ul>
       </section>
 
+      {/* 株価チャートの表示方法 */}
+      <section className="card card-pad">
+        <h2 className="text-[16px] font-extrabold text-ink">{ja ? "株価チャートの表示方法" : "How price charts are shown"}</h2>
+        <p className="mt-3 text-[13px] leading-relaxed text-muted">
+          {ja
+            ? "当サイトは株価データを保持・再配信していません。日経225・為替・個別銘柄のチャートは、TradingView が提供する公式の無料埋め込みウィジェットを表示しています（動画の埋め込みと同じ仕組みで、データのライセンス処理は提供元が行います）。"
+            : "This site does not store or redistribute price data. Charts are rendered via TradingView's free official embed widgets, with data licensing handled by the provider."}
+        </p>
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[12.5px] leading-relaxed text-muted">
+          <li>{ja ? "提供元のブランド表示を保持しています（無料利用の条件）。" : "Provider branding is retained, as required for free use."}</li>
+          <li>{ja ? "ウィジェットは表示領域に入ってから読み込みます（初期表示の高速化）。" : "Widgets load only when scrolled into view."}</li>
+          <li>
+            {ja
+              ? "ウィジェット利用時は提供元へ通信が発生します（第三者のプライバシーポリシーが適用されます）。"
+              : "Using the widget sends requests to the provider, under their own privacy policy."}
+          </li>
+          <li>{ja ? "価格には遅延が生じる場合があり、即時性は保証されません。" : "Prices may be delayed; timeliness is not guaranteed."}</li>
+        </ul>
+      </section>
+
+      {/* J-Quantsの位置づけ */}
+      <section className="card card-pad">
+        <h2 className="text-[16px] font-extrabold text-ink">{ja ? "J-Quants データの位置づけ" : "How J-Quants data is used"}</h2>
+        <p className="mt-3 text-[13px] leading-relaxed text-muted">
+          {ja
+            ? "J-Quants API の無料プランは 12週間遅延 のデータです。当サイトではこれを「最新株価」としては一切使用せず、過去チャート・財務・決算履歴といった履歴用途に限定して扱います。表示する場合は必ず「12週間遅延」「データ基準日」を明記します。"
+            : "The J-Quants free plan provides 12-week delayed data. We never present it as a current price; it is used only for historical charts, financials and results history, always labeled with the delay and as-of date."}
+        </p>
+      </section>
+
       {/* 更新頻度 */}
       <section className="card card-pad">
         <h2 className="text-[16px] font-extrabold text-ink">{ja ? "更新頻度" : "Update schedule"}</h2>
