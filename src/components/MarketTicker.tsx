@@ -1,44 +1,72 @@
-import type { Locale, MarketIndex } from "@/types";
+import Link from "next/link";
+import { Database, ExternalLink } from "lucide-react";
+import type { Locale } from "@/types";
+import type { DatasetMeta } from "@/types/market";
+import { FRESHNESS_LABEL } from "@/types/market";
 import { pick } from "@/lib/i18n";
-import { priceChangePercent } from "@/lib/metrics";
-import { formatNumber } from "@/lib/format";
+import { formatDateTimeJst, formatNumber } from "@/lib/format";
 
 /**
- * ヘッダー上部の市場ティッカー。CSSアニメーションのみ（JSゼロ）で軽量。
- * データはサンプルのため、帯の先頭に必ず SAMPLE 表記を出す。
+ * ヘッダー上部の帯。
+ * 架空の指数値は表示しない。実データ接続後はデータ基準日・遅延・更新時刻を出し、
+ * 未接続時は「データ準備中」と公式サイト導線のみを表示する。
  */
-export function MarketTicker({ indices, locale }: { indices: MarketIndex[]; locale: Locale }) {
+export function MarketTicker({
+  meta,
+  breadth,
+  locale,
+}: {
+  meta: DatasetMeta;
+  breadth: { advancing: number; declining: number; unchanged: number } | null;
+  locale: Locale;
+}) {
   const ja = locale === "ja";
-  const items = indices.map((i) => {
-    const pct = priceChangePercent(i.value, i.previousClose) ?? 0;
-    return { name: pick(locale, i.nameJa, i.nameEn), value: i.value, pct };
-  });
-  const loop = [...items, ...items];
+  const freshness = FRESHNESS_LABEL[meta.freshness] ?? FRESHNESS_LABEL.unknown;
 
   return (
     <div className="hidden border-b border-white/10 bg-navy text-white md:block">
-      <div className="flex h-9 items-center">
-        <span className="z-10 flex h-9 shrink-0 items-center gap-1.5 bg-navy pl-5 pr-4 text-[10px] font-bold uppercase tracking-widest text-gold sm:pl-8">
-          <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-gold" aria-hidden />
-          {ja ? "サンプル配信" : "Sample feed"}
-        </span>
-        <div className="relative flex-1 overflow-hidden mask-fade-r">
-          <div className="flex w-max animate-ticker items-center gap-8 whitespace-nowrap will-change-transform">
-            {loop.map((it, i) => {
-              const up = it.pct >= 0;
-              return (
-                <span key={`${it.name}-${i}`} className="flex items-center gap-2 text-[12px]">
-                  <span className="font-semibold text-white/70">{it.name}</span>
-                  <span className="num font-bold text-white">{formatNumber(it.value, 1)}</span>
-                  <span className={`num font-bold ${up ? "text-up" : "text-down"}`}>
-                    {up ? "▲" : "▼"} {up ? "+" : ""}
-                    {it.pct.toFixed(2)}%
-                  </span>
+      <div className="shell flex h-9 items-center gap-4 text-[11.5px]">
+        {meta.isFallback ? (
+          <>
+            <span className="flex shrink-0 items-center gap-1.5 font-bold uppercase tracking-widest text-gold">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
+              {ja ? "データ準備中" : "Data pending"}
+            </span>
+            <span className="truncate text-white/55">
+              {ja
+                ? "株価・指数の実データは未接続です。数値は公式サイトでご確認ください。"
+                : "Price and index data is not connected yet. Please check official sites."}
+            </span>
+            <Link
+              href={`/${locale}/data`}
+              className="ml-auto hidden shrink-0 items-center gap-1 font-bold text-white/70 transition-colors hover:text-white lg:inline-flex"
+            >
+              <ExternalLink size={11} aria-hidden />
+              {ja ? "データについて" : "About data"}
+            </Link>
+          </>
+        ) : (
+          <>
+            <span className="flex shrink-0 items-center gap-1.5 font-bold uppercase tracking-widest text-gold">
+              <Database size={12} aria-hidden />
+              {pick(locale, freshness.ja, freshness.en)}
+            </span>
+            {breadth && (
+              <span className="num flex shrink-0 items-center gap-3 text-white/70">
+                <span>
+                  <span className="text-up" aria-hidden>▲</span> {ja ? "値上がり" : "Up"} {formatNumber(breadth.advancing)}
                 </span>
-              );
-            })}
-          </div>
-        </div>
+                <span>
+                  <span className="text-down" aria-hidden>▼</span> {ja ? "値下がり" : "Down"} {formatNumber(breadth.declining)}
+                </span>
+              </span>
+            )}
+            <span className="num ml-auto hidden shrink-0 text-white/45 lg:block">
+              {meta.marketDataDate && `${ja ? "基準日" : "As of"} ${meta.marketDataDate} ・ `}
+              {ja ? "更新" : "Updated"} {formatDateTimeJst(meta.generatedAt, locale)} ・ {meta.sourceName}
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

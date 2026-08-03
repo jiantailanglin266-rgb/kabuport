@@ -6,8 +6,9 @@ import type { Locale } from "@/types";
 import { getDictionary, isLocale, pick } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 import { organizationLd, websiteLd, faqLd } from "@/lib/jsonld";
+import { getDataset } from "@/lib/dataset";
 import {
-  getBenefitEntries, getIndices, getRanking, getRecentDisclosures, getSectorHeatmap,
+  getBenefitEntries, getRanking, getRecentDisclosures, getSectorHeatmap,
   getSpotlightStocks, getUpcomingEarnings, listStockSummaries, listThemes, getStocksByTheme, listVideos,
   getRsiEntries,
 } from "@/lib/queries";
@@ -58,7 +59,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const company = getProviders().company;
 
   // --- データ収集 ---
-  const indices = getIndices();
+  const dataset = getDataset();
   const heatmap = getSectorHeatmap();
   const all = listStockSummaries();
   const gainers = getRanking("gainers", 6);
@@ -140,13 +141,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     a: pick(loc, f.aJa, f.aEn),
   }));
 
-  const heroIndices = indices.slice(0, 4).map((i) => ({
-    nameJa: i.nameJa,
-    nameEn: i.nameEn,
-    value: i.value,
-    pct: priceChangePercent(i.value, i.previousClose) ?? 0,
-  }));
-
   return (
     <>
       <JsonLd data={[organizationLd(), websiteLd(loc), faqLd(faqs)]} />
@@ -154,14 +148,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ① Hero */}
       <Hero
         locale={loc}
-        indices={heroIndices}
-        heatmap={heatmap}
-        ranking={gainers}
+        meta={dataset.meta}
+        counts={{ stocks: dataset.stocks.length, disclosures: dataset.disclosures.length }}
         stats={{ stocks: all.length, datapoints: 120, sectors: heatmap.length }}
       />
 
-      {/* ② Market Overview */}
-      <MarketOverview indices={indices} locale={loc} />
+      {/* ② Market Overview（架空の指数値は表示しない） */}
+      <MarketOverview meta={dataset.meta} breadth={null} locale={loc} />
 
       {/* ③ 人気ランキング */}
       <section className="bg-surface py-16 sm:py-20">

@@ -11,7 +11,14 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "fetch:data": "node scripts/fetch-jquants.mjs",
-    "fetch:videos": "node scripts/fetch-youtube.mjs"
+    "fetch:videos": "node scripts/fetch-youtube.mjs",
+    "data:listed": "node scripts/fetch-jquants-listed-info.mjs",
+    "data:prices": "node scripts/fetch-jquants-prices.mjs",
+    "data:financials": "node scripts/fetch-jquants-financials.mjs",
+    "data:edinet": "node scripts/fetch-edinet-documents.mjs",
+    "data:build": "node scripts/build-market-data.mjs",
+    "data:validate": "node scripts/validate-market-data.mjs",
+    "data:all": "npm run data:listed && npm run data:prices && npm run data:financials && npm run data:edinet && npm run data:build && npm run data:validate"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -29,6 +36,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
+    "server-only": "^0.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"

@@ -1,0 +1,115 @@
+name: Update market data and deploy
+
+# 実行タイミング（cronはUTC。JSTへの読み替えを併記）
+#   0 21 * * *   → JST 毎朝 06:00
+#   30 9 * * 1-5 → JST 平日 18:30
+#   0 22 * * 5   → JST 土曜 07:00（週末の全件更新）
+on:
+  schedule:
+    - cron: "0 21 * * *"
+    - cron: "30 9 * * 1-5"
+    - cron: "0 22 * * 5"
+  workflow_dispatch:
+    inputs:
+      full_refresh:
+        description: "キャッシュを無視して全件取得し直す"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Tokyo
+      STATIC_EXPORT: "true"
+      NEXT_PUBLIC_BASE_PATH: "/kabuport"
+      NEXT_PUBLIC_SITE_URL: "https://jiantailanglin266-rgb.github.io/kabuport"
+      # データ取得用（未設定なら各スクリプトは no-op となり、前回データを維持する）
+      JQUANTS_REFRESH_TOKEN: ${{ secrets.JQUANTS_REFRESH_TOKEN }}
+      JQUANTS_MAILADDRESS: ${{ secrets.JQUANTS_MAILADDRESS }}
+      JQUANTS_PASSWORD: ${{ secrets.JQUANTS_PASSWORD }}
+      JQUANTS_PLAN: ${{ vars.JQUANTS_PLAN || 'free' }}
+      EDINET_API_KEY: ${{ secrets.EDINET_API_KEY }}
+      # 公開サイトへの再配信可否（利用規約を確認できた場合のみ 'confirmed' を設定する）
+      JQUANTS_PUBLIC_REDISTRIBUTION: ${{ vars.JQUANTS_PUBLIC_REDISTRIBUTION }}
+      EDINET_PUBLIC_REDISTRIBUTION: ${{ vars.EDINET_PUBLIC_REDISTRIBUTION }}
+      NEXT_PUBLIC_DATA_MODE: ${{ vars.NEXT_PUBLIC_DATA_MODE || 'preview' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # 取得済みデータのキャッシュ（差分取得のため。取得失敗時のフォールバック元にもなる）
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: .data-cache
+          key: market-data-${{ github.run_id }}
+          restore-keys: |
+            market-data-
+
+      - name: Clear cache for full refresh
+        if: ${{ inputs.full_refresh }}
+        run: rm -rf .data-cache
+
+      # --- データ取得（いずれも認証情報が無ければ no-op で成功終了） ---
+      - name: Fetch J-Quants listed info
+        run: node scripts/fetch-jquants-listed-info.mjs
+
+      - name: Fetch J-Quants daily prices
+        run: node scripts/fetch-jquants-prices.mjs
+
+      - name: Fetch J-Quants financials
+        run: node scripts/fetch-jquants-financials.mjs
+
+      - name: Fetch EDINET documents
+        run: node scripts/fetch-edinet-documents.mjs
+
+      # --- 正規化・検証 ---
+      - name: Build public dataset
+        run: node scripts/build-market-data.mjs
+
+      - name: Validate dataset
+        run: node scripts/validate-market-data.mjs
+
+      # --- 生成済みデータセットをコミット（取得失敗時は差分が出ないだけ） ---
+      - name: Commit dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data || true
+          git commit -m "chore(data): update market dataset [skip ci]" || echo "no changes"
+          git push || echo "push skipped"
+
+      - name: Build site
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

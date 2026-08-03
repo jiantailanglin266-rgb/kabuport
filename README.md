@@ -109,6 +109,82 @@ docs/                     # 設計書一式
 - 既定は **mock**。`src/data/*.json` の seed から `src/lib/providers/mock.ts` が typed な各ビューを決定的に導出します。
 - 実データ接続時は `src/lib/providers/index.ts` で `MARKET_DATA_PROVIDER` に応じた live 実装を生成し、`Providers` インターフェースを満たすよう実装します（ページ側は変更不要）。取得失敗時は mock にフォールバックし、画面を壊しません。
 
+## ⚠ データ利用条件の確認状況（最重要）
+
+**取得できること＝公開サイトへ掲載してよいこと、ではありません。** 本プロジェクトは、利用規約で公開・再配信の可否を確認できたデータ元のみを公開データセットへ含めます。未確認のデータ元は既定で**公開しません**（`scripts/lib/dataset.mjs` の `sourcePolicies()` で制御）。
+
+| データ元 | 取得可否 | 公開表示可否 | 商用利用可否 | 遅延 | 要出典 | 確認日 |
+|---|---:|---:|---:|---|---:|---|
+| [J-Quants API](https://jpx-jquants.com/)（無料プラン） | 可（要登録） | **未確認（要確認）** | 未確認 | 12週間遅延 | 要 | 2026-08-03 |
+| [EDINET API v2](https://disclosure2.edinet-fsa.go.jp/)（金融庁） | 可（要APIキー） | **未確認（要確認）** | 未確認 | 提出後速やか | 要 | 2026-08-03 |
+| JPX 公式サイト（指数・銘柄ページ） | リンクのみ | リンクは可 | 未確認 | — | 要 | 2026-08-03 |
+| 各社IR・公式開示 | リンクのみ | リンクは可 | 未確認 | — | 要 | 2026-08-03 |
+| JPX リアルタイム/15分遅延配信 | **未契約** | 契約時のみ可 | 契約による | リアルタイム/15分 | 要 | 2026-08-03 |
+
+### 調査時に確認された注意事項（2026-08-03 時点）
+
+J-Quants の公開情報上、**取得したデータそのものを閲覧可能な形で第三者へ継続的に提供・配信する行為**、および**投資分析結果を継続反復して第三者へ提供・配信する行為**に制限がある旨の記述が確認されました。したがって、**J-Quants のデータをそのまま公開サイトへ掲載することは、現時点では許諾が確認できていません。**
+
+- 本リポジトリの既定設定では、J-Quants / EDINET のデータは**公開データセット `public/data/` に含まれません**。
+- 取得した生データは `.data-cache/`（**gitignore 済み・非公開**）にのみ保存され、私的利用・検証に留まります。
+- 公開掲載を有効化するには、**各データ元へ書面等で確認を取ったうえで**、リポジトリ変数に以下を設定してください。
+
+```bash
+JQUANTS_PUBLIC_REDISTRIBUTION=confirmed
+EDINET_PUBLIC_REDISTRIBUTION=confirmed
+```
+
+> ⚖️ 本表および上記の記載は、開発時点で公開情報を確認した結果であり、**法的助言ではありません。** 公開・商用利用の可否については、必ず各データ提供元および法律・コンプライアンスの専門家にご確認ください。
+
+## リアルタイム株価について
+
+**当サイトはリアルタイム株価を掲載しません。** JPX のリアルタイム/遅延配信データは有償であり、第三者への再配信には JPX との契約・許諾が必要です。無料で取得できる範囲では、リアルタイム株価を公開サイトへ再配信することはできません。
+
+そのため、日経平均・TOPIX 等の**指数値は数値を掲載せず、各指数の公式サイトへのリンクカード**を表示しています。将来、正式なデータ配信契約を締結した場合は、`LicensedRealtimeProvider` を実装して差し替えられる設計にしています。
+
+## データ更新パイプライン
+
+```
+GitHub Actions (JST 06:00 / 平日18:30 / 土07:00)
+  ├─ scripts/fetch-jquants-listed-info.mjs   → .data-cache/jquants/listed-info.json
+  ├─ scripts/fetch-jquants-prices.mjs        → .data-cache/jquants/prices.json（差分取得）
+  ├─ scripts/fetch-jquants-financials.mjs    → .data-cache/jquants/financials.json
+  ├─ scripts/fetch-edinet-documents.mjs      → .data-cache/edinet/documents.json（メタのみ）
+  ├─ scripts/build-market-data.mjs           → public/data/*.json（★公開可否ポリシーを適用）
+  └─ scripts/validate-market-data.mjs        → 異常値・構造検証
+```
+
+- **APIキーはフロントエンドに一切埋め込みません。** 取得は GitHub Actions（サーバー側）でのみ実行します。
+- 取得に失敗しても**既存の正常なJSONを削除しません**（前回成功データを維持し、`meta.json` に理由を記録）。
+- 差分取得（前回の最終取引日以降のみ）・指数バックオフ・最大3リトライ・レート制限間隔を実装。
+
+### ローカルでの実行
+
+```bash
+npm run data:all      # 取得 → 正規化 → 検証（キーが無い項目は自動でスキップ）
+npm run data:build    # 取得済みキャッシュから公開データセットのみ再生成
+npm run data:validate # 検証のみ
+```
+
+### GitHub Secrets / Variables
+
+| 種別 | 名前 | 用途 |
+|---|---|---|
+| Secret | `JQUANTS_REFRESH_TOKEN` | J-Quants 認証（または `JQUANTS_MAILADDRESS` + `JQUANTS_PASSWORD`） |
+| Secret | `EDINET_API_KEY` | EDINET API v2 のサブスクリプションキー |
+| Variable | `JQUANTS_PUBLIC_REDISTRIBUTION` | `confirmed` で公開掲載を有効化（**規約確認後のみ**） |
+| Variable | `EDINET_PUBLIC_REDISTRIBUTION` | 同上 |
+| Variable | `NEXT_PUBLIC_DATA_MODE` | `preview`（既定）/ `production` |
+
+手動実行: GitHub → Actions → **Update market data and deploy** → Run workflow（`full_refresh` で全件再取得）
+
+## データモード
+
+| モード | 挙動 |
+|---|---|
+| `preview`（既定） | 実データが無い場合、開発用サンプルを表示し、**サイト全体にデータ準備中バナー**を出す |
+| `production` | サンプルデータを一切表示しない。**実データが未接続ならビルドを失敗させる**（フェイルファスト） |
+
 ## 実データ接続（J-Quants・日次自動更新）
 
 現在の公開サイトはサンプルデータですが、**J-Quants API**（JPX公式・無料プランあり）を接続すると、GitHub Actions の日次ジョブで **企業名・株価・52週高安を実データ**に更新できます（指標は実株価で再計算）。GitHub Pages（静的）のまま運用できます。

@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-08-03T13:38:47.305Z",
+  "lastSuccessfulUpdateAt": null,
+  "sourceName": "未接続",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/",
+  "freshness": "unknown",
+  "marketDataDate": null,
+  "isFallback": true,
+  "warning": "株価データは未接続です。APIキーの設定、および各データ元の利用規約（公開再配信の可否）の確認が必要です。",
+  "counts": {
+    "stocks": 0,
+    "priceRows": 0,
+    "financials": 0,
+    "disclosures": 0
+  },
+  "excludedSources": [
+    {
+      "sourceId": "jquants",
+      "source": "J-Quants API",
+      "reason": "利用規約上の公開再配信可否が未確認のため、公開データセットへ含めていません。",
+      "howToEnable": "JQUANTS_PUBLIC_REDISTRIBUTION=confirmed"
+    },
+    {
+      "sourceId": "edinet",
+      "source": "EDINET API v2 (金融庁)",
+      "reason": "利用規約上の公開再配信可否が未確認のため、公開データセットへ含めていません。",
+      "howToEnable": "EDINET_PUBLIC_REDISTRIBUTION=confirmed"
+    }
+  ],
+  "sources": [
+    {
+      "id": "jquants",
+      "name": "J-Quants API",
+      "url": "https://jpx-jquants.com/",
+      "publicRedistributionConfirmed": false,
+      "note": "無料プランは12週間遅延。公開再配信の可否は要確認（既定では非公開）。"
+    },
+    {
+      "id": "edinet",
+      "name": "EDINET API v2 (金融庁)",
+      "url": "https://disclosure2.edinet-fsa.go.jp/",
+      "publicRedistributionConfirmed": false,
+      "note": "書類本文は保存せず、メタデータと公式閲覧URLのみを扱う。公開可否は要確認。"
+    }
+  ]
+}

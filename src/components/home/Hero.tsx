@@ -1,21 +1,19 @@
 import Link from "next/link";
 import { ArrowRight, LineChart, ShieldCheck } from "lucide-react";
 import type { Locale } from "@/types";
-import type { HeatmapCell, StockSummary } from "@/lib/queries";
+import type { DatasetMeta } from "@/types/market";
 import { CountUp } from "@/components/ui/CountUp";
 import { HeroDashboard } from "./HeroDashboard";
 
 export function Hero({
   locale,
-  indices,
-  heatmap,
-  ranking,
+  meta,
+  counts,
   stats,
 }: {
   locale: Locale;
-  indices: { nameJa: string; nameEn: string; value: number; pct: number }[];
-  heatmap: HeatmapCell[];
-  ranking: StockSummary[];
+  meta: DatasetMeta;
+  counts: { stocks: number; disclosures: number };
   stats: { stocks: number; datapoints: number; sectors: number };
 }) {
   const ja = locale === "ja";
@@ -98,14 +96,14 @@ export function Hero({
 
           <p className="mt-6 text-[11.5px] leading-relaxed text-white/40">
             {ja
-              ? "※ 掲載データはサンプルを含みます。本サイトは投資助言ではなく、特定銘柄の売買を推奨するものではありません。"
-              : "Data shown includes sample data. This site is not investment advice and does not recommend any security."}
+              ? "※ 株価はリアルタイムではありません。無料で正式に利用できるデータ元のみを使用し、遅延状況・基準日・提供元を明示します。本サイトは投資助言ではありません。"
+              : "Prices are not real-time. We use only officially available free sources and always disclose delay, as-of date and provider. This site is not investment advice."}
           </p>
         </div>
 
         {/* 右: ダッシュボード */}
         <div className="animate-fade-up [animation-delay:180ms]">
-          <HeroDashboard indices={indices} heatmap={heatmap} ranking={ranking} locale={locale} />
+          <HeroDashboard meta={meta} counts={counts} locale={locale} />
         </div>
       </div>
 

@@ -6,7 +6,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileNav } from "./MobileNav";
 import { MarketTicker } from "./MarketTicker";
-import { getIndices } from "@/lib/queries";
+import { getDataset } from "@/lib/dataset";
 
 export interface NavItem {
   label: string;
@@ -41,8 +41,8 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-50">
-      {/* 市場ティッカー（Bloomberg風の細帯） */}
-      <MarketTicker indices={getIndices()} locale={locale} />
+      {/* データ状況の帯（架空の指数値は表示しない） */}
+      <MarketTicker meta={getDataset().meta} breadth={null} locale={locale} />
 
       {/* メインバー: 高さ80px / 白背景 */}
       <div className="border-b border-line bg-surface/92 shadow-header backdrop-blur-md">
