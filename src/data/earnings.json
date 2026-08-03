@@ -1,0 +1,14 @@
+[
+  { "code": "7203", "scheduledDate": "2026-08-05", "period": "q1", "timeOfDay": "after_close", "announced": false },
+  { "code": "6758", "scheduledDate": "2026-08-06", "period": "q1", "timeOfDay": "during", "announced": false },
+  { "code": "9432", "scheduledDate": "2026-08-07", "period": "q1", "timeOfDay": "after_close", "announced": false },
+  { "code": "8306", "scheduledDate": "2026-08-04", "period": "q1", "timeOfDay": "after_close", "announced": true },
+  { "code": "9984", "scheduledDate": "2026-08-11", "period": "q1", "timeOfDay": "after_close", "announced": false },
+  { "code": "6861", "scheduledDate": "2026-08-03", "period": "q1", "timeOfDay": "during", "announced": true },
+  { "code": "8058", "scheduledDate": "2026-08-04", "period": "q1", "timeOfDay": "after_close", "announced": true },
+  { "code": "4502", "scheduledDate": "2026-08-06", "period": "q1", "timeOfDay": "before_open", "announced": false },
+  { "code": "7974", "scheduledDate": "2026-08-05", "period": "q1", "timeOfDay": "after_close", "announced": false },
+  { "code": "8035", "scheduledDate": "2026-08-12", "period": "q1", "timeOfDay": "after_close", "announced": false },
+  { "code": "9433", "scheduledDate": "2026-08-03", "period": "q1", "timeOfDay": "after_close", "announced": true },
+  { "code": "6098", "scheduledDate": "2026-08-13", "period": "q1", "timeOfDay": "during", "announced": false }
+]

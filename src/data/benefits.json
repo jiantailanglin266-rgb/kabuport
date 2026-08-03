@@ -1,0 +1,10 @@
+[
+  { "code": "7203", "category": "ownproduct", "contentJa": "オリジナルグッズ・株主優待カタログ (サンプル)", "contentEn": "Original goods / benefit catalog (sample)", "requiredShares": 100, "recordMonths": [3], "longTermCondition": "3年以上保有で内容拡充 (サンプル)", "shippingTiming": "6月頃", "officialUrl": "https://global.toyota/jp/ir/" },
+  { "code": "9433", "category": "catalog", "contentJa": "カタログギフト (サンプル)", "contentEn": "Catalog gift (sample)", "requiredShares": 100, "recordMonths": [3], "longTermCondition": "5年以上保有で増額 (サンプル)", "benefitValue": 3000, "shippingTiming": "11月頃", "officialUrl": "https://www.kddi.com/corporate/ir/" },
+  { "code": "7974", "category": "ownproduct", "contentJa": "自社関連グッズ (サンプル)", "contentEn": "Own-brand goods (sample)", "requiredShares": 100, "recordMonths": [3], "shippingTiming": "7月頃", "officialUrl": "https://www.nintendo.co.jp/ir/" },
+  { "code": "6098", "category": "voucher", "contentJa": "クオカード (サンプル)", "contentEn": "QUO card (sample)", "requiredShares": 100, "recordMonths": [3], "benefitValue": 2000, "shippingTiming": "6月頃", "officialUrl": "https://recruit-holdings.com/ja/ir/" },
+  { "code": "8058", "category": "shopping", "contentJa": "優待割引 (サンプル)", "contentEn": "Shopping discount (sample)", "requiredShares": 100, "recordMonths": [3], "shippingTiming": "6月頃", "officialUrl": "https://www.mitsubishicorp.com/jp/ja/ir/" },
+  { "code": "4502", "category": "daily", "contentJa": "自社ヘルスケア製品 (サンプル)", "contentEn": "Own healthcare products (sample)", "requiredShares": 100, "recordMonths": [3], "shippingTiming": "6月頃", "officialUrl": "https://www.takeda.com/ja-jp/investors/" },
+  { "code": "9432", "category": "voucher", "contentJa": "dポイント (サンプル)", "contentEn": "Loyalty points (sample)", "requiredShares": 100, "recordMonths": [3], "longTermCondition": "2年以上保有が条件 (サンプル)", "benefitValue": 1500, "shippingTiming": "9月頃", "officialUrl": "https://group.ntt/jp/ir/" },
+  { "code": "6758", "category": "leisure", "contentJa": "自社サービス優待 (サンプル)", "contentEn": "Own-service benefit (sample)", "requiredShares": 100, "recordMonths": [3], "shippingTiming": "7月頃", "officialUrl": "https://www.sony.com/ja/SonyInfo/IR/" }
+]

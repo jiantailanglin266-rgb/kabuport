@@ -1,0 +1,15 @@
+[
+  { "slug": "semiconductor", "nameJa": "半導体", "nameEn": "Semiconductors", "descriptionJa": "半導体の製造・装置・材料に関連する銘柄群。", "descriptionEn": "Stocks related to semiconductor manufacturing, equipment and materials." },
+  { "slug": "ai", "nameJa": "AI", "nameEn": "Artificial Intelligence", "descriptionJa": "AI開発・活用・インフラに関連する銘柄群。", "descriptionEn": "Stocks related to AI development, applications and infrastructure." },
+  { "slug": "datacenter", "nameJa": "データセンター", "nameEn": "Data Center", "descriptionJa": "データセンター建設・運用・関連機器の銘柄群。", "descriptionEn": "Data-center construction, operation and equipment." },
+  { "slug": "defense", "nameJa": "防衛", "nameEn": "Defense", "descriptionJa": "防衛・安全保障関連の銘柄群。", "descriptionEn": "Defense and security-related stocks." },
+  { "slug": "ev", "nameJa": "EV", "nameEn": "Electric Vehicles", "descriptionJa": "電気自動車・電池・充電インフラの銘柄群。", "descriptionEn": "EVs, batteries and charging infrastructure." },
+  { "slug": "renewable", "nameJa": "再生可能エネルギー", "nameEn": "Renewable Energy", "descriptionJa": "再エネ発電・関連設備の銘柄群。", "descriptionEn": "Renewable power generation and related equipment." },
+  { "slug": "inbound", "nameJa": "インバウンド", "nameEn": "Inbound Tourism", "descriptionJa": "訪日観光需要に関連する銘柄群。", "descriptionEn": "Stocks tied to inbound tourism demand." },
+  { "slug": "game", "nameJa": "ゲーム", "nameEn": "Gaming", "descriptionJa": "ゲーム機・ソフト・IP関連の銘柄群。", "descriptionEn": "Game hardware, software and IP." },
+  { "slug": "pharma", "nameJa": "医薬品", "nameEn": "Pharma", "descriptionJa": "医薬品・創薬に関連する銘柄群。", "descriptionEn": "Pharmaceuticals and drug discovery." },
+  { "slug": "dx", "nameJa": "DX", "nameEn": "Digital Transformation", "descriptionJa": "業務のデジタル化を推進する銘柄群。", "descriptionEn": "Stocks driving digital transformation." },
+  { "slug": "saas", "nameJa": "SaaS", "nameEn": "SaaS", "descriptionJa": "サブスク型ソフトウェアの銘柄群。", "descriptionEn": "Subscription software companies." },
+  { "slug": "high_dividend", "nameJa": "高配当", "nameEn": "High Dividend", "descriptionJa": "配当利回りが相対的に高い銘柄群。", "descriptionEn": "Stocks with relatively high dividend yields." },
+  { "slug": "consecutive_increase", "nameJa": "連続増配", "nameEn": "Dividend Growth", "descriptionJa": "連続して増配を続けている銘柄群。", "descriptionEn": "Stocks with a track record of consecutive dividend increases." }
+]

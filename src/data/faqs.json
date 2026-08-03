@@ -1,0 +1,12 @@
+[
+  { "qJa": "KABUPORTは投資助言サービスですか？", "aJa": "いいえ。KABUPORTは客観的なデータと一般的な教育情報を提供する情報プラットフォームであり、特定銘柄の売買を推奨する投資助言サービスではありません。",
+    "qEn": "Is KABUPORT an investment advisory service?", "aEn": "No. KABUPORT is an information platform providing objective data and general educational content; it does not recommend buying or selling any specific security." },
+  { "qJa": "掲載されている株価はリアルタイムですか？", "aJa": "本デモ環境の株価・財務・配当・優待はすべてサンプルデータです。実サービスでは提供元・取得時刻・遅延を明示し、リアルタイム性は保証しません。",
+    "qEn": "Are the prices shown real-time?", "aEn": "All prices, financials, dividends and benefits in this demo are sample data. In production we display the source, timestamp and delay, and do not guarantee real-time data." },
+  { "qJa": "証券会社の比較はどのように評価していますか？", "aJa": "評価基準・調査日・情報源・利益相反を公開します。広告報酬額のみでランキングを決定することはありません。アフィリエイトリンクにはその旨を明示します。",
+    "qEn": "How are brokers compared?", "aEn": "We disclose the evaluation criteria, survey date, sources and conflicts of interest. Rankings are never decided by ad revenue alone, and affiliate links are labeled as such." },
+  { "qJa": "データが間違っている場合はどうすればよいですか？", "aJa": "各ページの訂正依頼導線からご連絡ください。訂正ポリシーに基づき確認・修正し、更新履歴を残します。",
+    "qEn": "What if data is wrong?", "aEn": "Use the correction link on each page. We verify and fix per our correction policy and keep an update history." },
+  { "qJa": "株主優待の内容は変わりますか？", "aJa": "優待内容は変更・廃止される可能性があります。必ず各企業の公式情報をご確認ください。",
+    "qEn": "Can shareholder benefits change?", "aEn": "Benefits may change or be discontinued. Always check each company's official information." }
+]

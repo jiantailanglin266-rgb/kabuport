@@ -1,0 +1,12 @@
+[
+  { "code": "electric_appliances", "nameJa": "電気機器", "nameEn": "Electric Appliances", "descriptionJa": "半導体・電子部品・家電・FA機器などを含む東証33業種の一つ。", "descriptionEn": "TSE sector covering semiconductors, electronic components, appliances and FA equipment." },
+  { "code": "info_comm", "nameJa": "情報・通信業", "nameEn": "Information & Communication", "descriptionJa": "通信キャリア・IT・インターネットサービスなどを含む業種。", "descriptionEn": "Telecom carriers, IT and internet services." },
+  { "code": "banks", "nameJa": "銀行業", "nameEn": "Banks", "descriptionJa": "都市銀行・地方銀行・信託銀行などの業種。", "descriptionEn": "City, regional and trust banks." },
+  { "code": "transport_equip", "nameJa": "輸送用機器", "nameEn": "Transportation Equipment", "descriptionJa": "自動車・自動車部品・輸送機器メーカーの業種。", "descriptionEn": "Automakers, auto parts and transport equipment." },
+  { "code": "wholesale", "nameJa": "卸売業", "nameEn": "Wholesale Trade", "descriptionJa": "総合商社・専門商社などの業種。", "descriptionEn": "General and specialized trading houses." },
+  { "code": "pharma", "nameJa": "医薬品", "nameEn": "Pharmaceuticals", "descriptionJa": "医薬品の研究開発・製造・販売を行う業種。", "descriptionEn": "Pharmaceutical R&D, manufacturing and sales." },
+  { "code": "services", "nameJa": "サービス業", "nameEn": "Services", "descriptionJa": "人材・情報・その他サービスを提供する業種。", "descriptionEn": "Staffing, information and other services." },
+  { "code": "other_products", "nameJa": "その他製品", "nameEn": "Other Products", "descriptionJa": "ゲーム機・玩具・楽器・印刷などを含む業種。", "descriptionEn": "Games, toys, instruments, printing and more." },
+  { "code": "retail", "nameJa": "小売業", "nameEn": "Retail Trade", "descriptionJa": "百貨店・専門店・EC などの業種。", "descriptionEn": "Department stores, specialty retail and e-commerce." },
+  { "code": "machinery", "nameJa": "機械", "nameEn": "Machinery", "descriptionJa": "産業機械・工作機械・建設機械などの業種。", "descriptionEn": "Industrial, machine-tool and construction machinery." }
+]

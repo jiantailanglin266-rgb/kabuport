@@ -1,0 +1,8 @@
+[
+  { "id": "nikkei225", "nameJa": "日経平均株価", "nameEn": "Nikkei 225", "value": 39250.5, "previousClose": 38980.2, "operator": "日本経済新聞社" },
+  { "id": "topix", "nameJa": "TOPIX", "nameEn": "TOPIX", "value": 2720.8, "previousClose": 2705.4, "operator": "JPX総研" },
+  { "id": "jpxnikkei400", "nameJa": "JPX日経インデックス400", "nameEn": "JPX-Nikkei 400", "value": 24650.1, "previousClose": 24580.0, "operator": "JPX総研 / 日本経済新聞社" },
+  { "id": "growth250", "nameJa": "東証グロース市場250指数", "nameEn": "TSE Growth Market 250", "value": 645.3, "previousClose": 651.9, "operator": "JPX総研" },
+  { "id": "reit", "nameJa": "東証REIT指数", "nameEn": "TSE REIT Index", "value": 1795.2, "previousClose": 1788.6, "operator": "JPX総研" },
+  { "id": "usdjpy", "nameJa": "ドル円", "nameEn": "USD/JPY", "value": 151.35, "previousClose": 151.8, "operator": "参考レート" }
+]
