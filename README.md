@@ -109,6 +109,23 @@ docs/                     # 設計書一式
 - 既定は **mock**。`src/data/*.json` の seed から `src/lib/providers/mock.ts` が typed な各ビューを決定的に導出します。
 - 実データ接続時は `src/lib/providers/index.ts` で `MARKET_DATA_PROVIDER` に応じた live 実装を生成し、`Providers` インターフェースを満たすよう実装します（ページ側は変更不要）。取得失敗時は mock にフォールバックし、画面を壊しません。
 
+## 実データ接続（J-Quants・日次自動更新）
+
+現在の公開サイトはサンプルデータですが、**J-Quants API**（JPX公式・無料プランあり）を接続すると、GitHub Actions の日次ジョブで **企業名・株価・52週高安を実データ**に更新できます（指標は実株価で再計算）。GitHub Pages（静的）のまま運用できます。
+
+**セットアップ（お客様の作業）:**
+1. [J-Quants](https://jpx-jquants.com/) に無料登録し、リフレッシュトークンを取得。
+2. GitHub リポジトリの **Settings → Secrets and variables → Actions** で以下を登録:
+   - `JQUANTS_REFRESH_TOKEN`（推奨）、または `JQUANTS_MAILADDRESS` + `JQUANTS_PASSWORD`
+   - （任意）変数 `JQUANTS_DELAY_MINUTES`（無料プランの遅延分数。遅延バッジ表示用）
+3. **Actions → "Refresh data (J-Quants) and deploy" → Run workflow** で即時実行（以後は毎日 06:00 JST に自動更新）。
+
+**仕組み:**
+- `scripts/fetch-jquants.mjs` が取得し `src/data/live/jquants.json` に書き出す（**認証情報が無ければ何もせずサンプル維持**）。
+- `src/lib/providers/jquants.ts` が実データを mock の上にマージ。実データがある銘柄は `dataStatus: verified`（`DataSourceBadge` が出典=J-Quantsを表示）、無い項目（配当・優待等）はサンプルのまま明示。
+- 無料プランは配信遅延があります（本サイトは非リアルタイムを明示済み）。リアルタイム株価は有料ライセンスが必要です。
+- ローカル確認: `JQUANTS_REFRESH_TOKEN=... npm run fetch:data` → `npm run dev`
+
 ## 外部 API 接続方法（将来）
 
 `src/lib/providers/types.ts` の各インターフェース（`MarketDataProvider` / `CompanyDataProvider` / `DisclosureProvider` …）を実装したファイルを追加し、`index.ts` の分岐で返すだけ。**UI/ページの実装変更は不要**です。JPX 上場会社情報・EDINET・TDnet・適法な株価 API 等、利用規約・ライセンスを尊重して接続してください（スクレイピング前提にしないこと）。

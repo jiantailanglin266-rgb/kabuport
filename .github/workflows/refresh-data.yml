@@ -1,0 +1,59 @@
+name: Refresh data (J-Quants) and deploy
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 毎日 21:00 UTC (06:00 JST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      STATIC_EXPORT: "true"
+      NEXT_PUBLIC_BASE_PATH: "/kabuport"
+      NEXT_PUBLIC_SITE_URL: "https://jiantailanglin266-rgb.github.io/kabuport"
+      # 実データ取得用シークレット（未設定ならサンプルのまま）
+      JQUANTS_REFRESH_TOKEN: ${{ secrets.JQUANTS_REFRESH_TOKEN }}
+      JQUANTS_MAILADDRESS: ${{ secrets.JQUANTS_MAILADDRESS }}
+      JQUANTS_PASSWORD: ${{ secrets.JQUANTS_PASSWORD }}
+      JQUANTS_DELAY_MINUTES: ${{ vars.JQUANTS_DELAY_MINUTES }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Fetch J-Quants data (no-op if no secrets)
+        run: node scripts/fetch-jquants.mjs
+      - name: Commit updated snapshot (best-effort)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/live/jquants.json || true
+          git commit -m "chore(data): refresh J-Quants snapshot [skip ci]" || echo "no changes"
+          git push || echo "push skipped"
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
