@@ -2,7 +2,7 @@
 // 外部APIを差替えてもページ側の実装を変えないための境界 (spec §5)。
 import type {
   Company, Quote, Valuation, FinancialYear, Dividend, ShareholderBenefit,
-  EarningsEvent, Disclosure, MarketIndex, Industry, Theme,
+  EarningsEvent, Disclosure, MarketIndex, Industry, Theme, Video, VideoCategory,
 } from "@/types";
 
 export type ProviderMode = "mock" | "live";
@@ -41,6 +41,14 @@ export interface EarningsProvider {
   listEarnings(): EarningsEvent[];
 }
 
+/** 動画（YouTube Data API v3 等へ差し替え可能な境界） */
+export interface VideoProvider {
+  listVideos(): Video[];
+  getVideo(id: string): Video | undefined;
+  listByCategory(category: VideoCategory): Video[];
+  listByCode(code: string): Video[];
+}
+
 export interface Providers {
   mode: ProviderMode;
   company: CompanyDataProvider;
@@ -49,4 +57,5 @@ export interface Providers {
   benefit: ShareholderBenefitProvider;
   disclosure: DisclosureProvider;
   earnings: EarningsProvider;
+  video: VideoProvider;
 }

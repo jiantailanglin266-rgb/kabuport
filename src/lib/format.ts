@@ -48,6 +48,29 @@ export function formatRatio(value: number | null | undefined, digits = 2): strin
   return `${value.toFixed(digits)}%`;
 }
 
+/** 動画の再生時間。1時間未満は m:ss、以上は h:mm:ss。 */
+export function formatDuration(seconds: number | null | undefined): string {
+  if (!nz(seconds) || seconds < 0) return "—";
+  const s = Math.floor(seconds % 60);
+  const m = Math.floor((seconds / 60) % 60);
+  const h = Math.floor(seconds / 3600);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+}
+
+/** 再生回数などの概数表示（ja: 万/億、en: K/M）。 */
+export function formatCompactCount(value: number | null | undefined, locale: Locale): string {
+  if (!nz(value)) return "—";
+  if (locale === "ja") {
+    if (value >= 1e8) return `${(value / 1e8).toFixed(1)}億`;
+    if (value >= 1e4) return `${(value / 1e4).toFixed(1)}万`;
+    return formatNumber(value);
+  }
+  if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`;
+  if (value >= 1e3) return `${(value / 1e3).toFixed(1)}K`;
+  return formatNumber(value);
+}
+
 export function formatDate(iso: string | null | undefined, locale: Locale): string {
   if (!iso) return "—";
   const d = new Date(iso);

@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "fetch:data": "node scripts/fetch-jquants.mjs"
+    "fetch:data": "node scripts/fetch-jquants.mjs",
+    "fetch:videos": "node scripts/fetch-youtube.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

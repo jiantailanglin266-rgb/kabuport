@@ -90,4 +90,6 @@ export const jquantsProviders: Providers = {
   benefit: mockProviders.benefit,
   disclosure: mockProviders.disclosure,
   earnings: mockProviders.earnings,
+  // 動画は J-Quants の対象外（YouTube側のプロバイダーで別途差し替える）
+  video: mockProviders.video,
 };

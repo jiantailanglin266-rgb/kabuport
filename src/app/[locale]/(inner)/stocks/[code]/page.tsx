@@ -5,7 +5,8 @@ import type { ForecastType, Locale } from "@/types";
 import { getDictionary, isLocale, pick } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbLd, companyLd } from "@/lib/jsonld";
-import { getStockDetail, listAllCodes, listStockSummaries } from "@/lib/queries";
+import { getStockDetail, getVideosForCode, listAllCodes, listStockSummaries } from "@/lib/queries";
+import { VideoCard } from "@/components/video/VideoCard";
 import { getProviders } from "@/lib/providers";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
 import { PriceChange } from "@/components/PriceChange";
@@ -55,6 +56,7 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
   const name = pick(loc, c.nameJa, c.nameEn);
   const seg = t.segments[c.segment] ?? c.segment;
   const peers = listStockSummaries().filter((p) => p.company.industryCode === c.industryCode && p.company.code !== c.code).slice(0, 3);
+  const videos = getVideosForCode(code, 3);
   const industry = getProviders().company.listIndustries().find((i) => i.code === c.industryCode);
   const industryName = industry ? pick(loc, industry.nameJa, industry.nameEn) : c.industryCode;
 
@@ -199,6 +201,21 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {/* 関連動画 */}
+      {videos.length > 0 && (
+        <section>
+          <SectionTitle>{loc === "ja" ? "関連動画" : "Related videos"}</SectionTitle>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {videos.map((v) => (
+              <VideoCard key={v.id} video={v} locale={loc} compact />
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-muted">
+            {loc === "ja" ? "動画はサンプル（モック）データです。" : "Videos are mock sample data."}
+          </p>
         </section>
       )}
 

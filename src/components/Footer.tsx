@@ -34,6 +34,7 @@ export function Footer({ locale }: { locale: Locale }) {
       title: ja ? "学ぶ" : "Learn",
       links: [
         { label: ja ? "投資を学ぶ" : "Learn", href: `${b}/learn` },
+        { label: ja ? "動画ライブラリ" : "Video library", href: `${b}/videos` },
         { label: ja ? "学習ロードマップ" : "Learning paths", href: `${b}/paths` },
         { label: ja ? "投資用語集" : "Glossary", href: `${b}/glossary` },
         { label: ja ? "著者・監修者" : "Authors & reviewers", href: `${b}/experts` },

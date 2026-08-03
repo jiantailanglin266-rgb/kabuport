@@ -7,9 +7,10 @@ import indicesRaw from "@/data/indices.json";
 import benefitsRaw from "@/data/benefits.json";
 import earningsRaw from "@/data/earnings.json";
 import disclosuresRaw from "@/data/disclosures.json";
+import videosRaw from "@/data/videos.json";
 import type {
   Company, Quote, Valuation, FinancialYear, Dividend, ShareholderBenefit,
-  EarningsEvent, Disclosure, MarketIndex, Industry, Theme, Provenance,
+  EarningsEvent, Disclosure, MarketIndex, Industry, Theme, Provenance, Video,
 } from "@/types";
 import * as m from "@/lib/metrics";
 import type { Providers } from "./types";
@@ -132,6 +133,10 @@ const disclosures = (disclosuresRaw as Omit<Disclosure, "provenance">[]).map(
 const indices = (indicesRaw as Omit<MarketIndex, "provenance">[]).map(
   (i): MarketIndex => ({ ...i, provenance: sampleProvenance() }),
 );
+// 動画: 新しい順に整列。YouTube連携前は youtubeId を持たない（＝埋め込み再生しない）。
+const videos = (videosRaw as Omit<Video, "provenance">[])
+  .map((v): Video => ({ ...v, provenance: sampleProvenance() }))
+  .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
 export const mockProviders: Providers = {
   mode: "mock",
@@ -161,4 +166,10 @@ export const mockProviders: Providers = {
     listByCode: (code) => disclosures.filter((d) => d.code === code),
   },
   earnings: { listEarnings: () => earnings },
+  video: {
+    listVideos: () => videos,
+    getVideo: (id) => videos.find((v) => v.id === id),
+    listByCategory: (category) => videos.filter((v) => v.category === category),
+    listByCode: (code) => videos.filter((v) => v.relatedCodes?.includes(code)),
+  },
 };

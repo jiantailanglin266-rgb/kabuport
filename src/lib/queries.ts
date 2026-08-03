@@ -153,6 +153,34 @@ export function listIndustries() {
   return getProviders().company.listIndustries();
 }
 
+// ---- 動画 ----
+export function listVideos() {
+  return getProviders().video.listVideos();
+}
+
+export function getVideo(id: string) {
+  return getProviders().video.getVideo(id);
+}
+
+export function listVideoIds(): string[] {
+  return getProviders().video.listVideos().map((v) => v.id);
+}
+
+/** 同一カテゴリー優先、不足分は新着で補完した関連動画。 */
+export function getRelatedVideos(id: string, limit = 4) {
+  const p = getProviders().video;
+  const current = p.getVideo(id);
+  if (!current) return [];
+  const sameCategory = p.listByCategory(current.category).filter((v) => v.id !== id);
+  const others = p.listVideos().filter((v) => v.id !== id && v.category !== current.category);
+  return [...sameCategory, ...others].slice(0, limit);
+}
+
+/** 銘柄詳細ページに出す関連動画。 */
+export function getVideosForCode(code: string, limit = 3) {
+  return getProviders().video.listByCode(code).slice(0, limit);
+}
+
 // ---- 業種別ヒートマップ（平均騰落率・時価総額でタイルを重み付け） ----
 export interface HeatmapCell {
   code: string;

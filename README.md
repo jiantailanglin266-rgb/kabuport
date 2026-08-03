@@ -126,6 +126,21 @@ docs/                     # 設計書一式
 - 無料プランは配信遅延があります（本サイトは非リアルタイムを明示済み）。リアルタイム株価は有料ライセンスが必要です。
 - ローカル確認: `JQUANTS_REFRESH_TOKEN=... npm run fetch:data` → `npm run dev`
 
+## 動画ライブラリ（YouTube・現在はモック）
+
+`/[locale]/videos` に動画ライブラリを実装しています。現在は **`src/data/videos.json` のモックデータ**で動作し、動画・チャンネル名・再生回数はすべて架空のサンプルです（実在の動画とは紐づきません）。
+
+**実データへの切り替え:**
+1. Google Cloud で YouTube Data API v3 を有効化し、APIキーを取得。
+2. `YOUTUBE_API_KEY`（任意で `YOUTUBE_CHANNEL_IDS` / `YOUTUBE_QUERIES`）を設定。
+3. `npm run fetch:videos` → `src/data/live/youtube.json` が生成される。
+
+**仕組み:**
+- 取得は `scripts/fetch-youtube.mjs`（**APIキーが無ければ no-op**＝モック維持）。
+- `Video.youtubeId` が入ると `VideoPlayer` が **youtube-nocookie の埋め込みプレーヤー**に切り替わります（規約に従い公式プレーヤーで再生。動画本体は保存しません）。
+- 構造化データ `VideoObject` は **実在する動画（youtubeId あり）のときのみ出力**します（架空の動画を出さないため）。
+- カテゴリー分類はタイトル/説明からのルールベース（決定的）。
+
 ## 外部 API 接続方法（将来）
 
 `src/lib/providers/types.ts` の各インターフェース（`MarketDataProvider` / `CompanyDataProvider` / `DisclosureProvider` …）を実装したファイルを追加し、`index.ts` の分岐で返すだけ。**UI/ページの実装変更は不要**です。JPX 上場会社情報・EDINET・TDnet・適法な株価 API 等、利用規約・ライセンスを尊重して接続してください（スクレイピング前提にしないこと）。

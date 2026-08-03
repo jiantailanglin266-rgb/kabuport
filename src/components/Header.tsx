@@ -24,6 +24,7 @@ export function buildNav(locale: Locale): NavItem[] {
     { label: ja ? "テーマ株" : "Themes", href: `${b}/themes` },
     { label: ja ? "決算" : "Earnings", href: `${b}/earnings` },
     { label: ja ? "配当・優待" : "Dividends", href: `${b}/dividends` },
+    { label: ja ? "動画" : "Videos", href: `${b}/videos` },
     { label: "IPO", href: `${b}#ipo` },
     { label: ja ? "市場ニュース" : "News", href: `${b}#news` },
     { label: ja ? "証券会社" : "Brokers", href: `${b}/brokers` },

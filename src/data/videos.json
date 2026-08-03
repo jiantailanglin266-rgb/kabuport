@@ -1,0 +1,109 @@
+[
+  {
+    "id": "v001", "category": "market", "durationSec": 842, "publishedAt": "2026-08-03T07:30:00+09:00", "viewCount": 128400,
+    "channelJa": "マーケット解説チャンネル（サンプル）", "channelEn": "Market Commentary (Sample)",
+    "titleJa": "【今週の日本株】日経平均の節目と、注目される業種の整理（サンプル動画）",
+    "titleEn": "This week in Japanese equities: key levels and sectors in focus (sample)",
+    "descriptionJa": "今週の相場を振り返り、指数の水準感と物色されている業種を客観データで整理します。特定銘柄の売買を推奨する内容ではありません。",
+    "descriptionEn": "A weekly recap covering index levels and sectors in focus, based on objective data. Not a recommendation of any security.",
+    "relatedCodes": ["7203", "8035"], "themeSlugs": ["semiconductor"]
+  },
+  {
+    "id": "v002", "category": "beginner", "durationSec": 615, "publishedAt": "2026-08-02T18:00:00+09:00", "viewCount": 96200,
+    "channelJa": "はじめての株式投資（サンプル）", "channelEn": "Investing Basics (Sample)",
+    "titleJa": "PER・PBRの違いを5分で。初心者がつまずくポイントを図解（サンプル動画）",
+    "titleEn": "P/E vs P/B in five minutes, illustrated for beginners (sample)",
+    "descriptionJa": "指標の定義と、業種によって適正水準が異なる理由を図解で解説します。",
+    "descriptionEn": "Definitions and why fair levels differ by sector, explained with diagrams.",
+    "relatedCodes": ["6861"]
+  },
+  {
+    "id": "v003", "category": "earnings", "durationSec": 1284, "publishedAt": "2026-08-02T12:10:00+09:00", "viewCount": 74800,
+    "channelJa": "決算読み解きラボ（サンプル）", "channelEn": "Earnings Lab (Sample)",
+    "titleJa": "決算短信の読み方：営業利益とキャッシュフローを突き合わせる（サンプル動画）",
+    "titleEn": "How to read an earnings summary: operating profit vs cash flow (sample)",
+    "descriptionJa": "決算短信のどこを見るべきか、実績と会社予想の区別を含めて解説します。",
+    "descriptionEn": "Where to look in an earnings summary, including actual vs company forecast.",
+    "relatedCodes": ["6758", "9432"]
+  },
+  {
+    "id": "v004", "category": "dividend", "durationSec": 733, "publishedAt": "2026-08-01T19:45:00+09:00", "viewCount": 156900,
+    "channelJa": "配当生活リサーチ（サンプル）", "channelEn": "Dividend Research (Sample)",
+    "titleJa": "高配当株の落とし穴：利回りだけで選ぶと何が起きるか（サンプル動画）",
+    "titleEn": "The high-yield trap: what happens when you screen on yield alone (sample)",
+    "descriptionJa": "配当性向・連続増配年数・キャッシュフローを併せて確認する重要性を解説します。",
+    "descriptionEn": "Why payout ratio, dividend streaks and cash flow matter alongside yield.",
+    "relatedCodes": ["9433", "8058"], "themeSlugs": ["high_dividend"]
+  },
+  {
+    "id": "v005", "category": "nisa", "durationSec": 968, "publishedAt": "2026-08-01T09:00:00+09:00", "viewCount": 212300,
+    "channelJa": "制度まるわかり投資チャンネル（サンプル）", "channelEn": "Policy & Investing (Sample)",
+    "titleJa": "新NISAのつみたて投資枠と成長投資枠、使い分けの考え方（サンプル動画）",
+    "titleEn": "New NISA: accumulation vs growth quotas explained (sample)",
+    "descriptionJa": "制度の枠組みを整理します。上限や詳細は変更の可能性があるため公式情報をご確認ください。",
+    "descriptionEn": "An overview of the framework. Limits may change, so check official sources.",
+    "themeSlugs": ["high_dividend"]
+  },
+  {
+    "id": "v006", "category": "analysis", "durationSec": 1502, "publishedAt": "2026-07-31T20:20:00+09:00", "viewCount": 88100,
+    "channelJa": "企業分析ノート（サンプル）", "channelEn": "Company Analysis Notes (Sample)",
+    "titleJa": "半導体製造装置セクターの構造：業績が景気循環とどう連動するか（サンプル動画）",
+    "titleEn": "Semiconductor equipment: how results track the capex cycle (sample)",
+    "descriptionJa": "セクター全体の収益構造と、設備投資サイクルとの関係を整理します。",
+    "descriptionEn": "The sector's earnings structure and its relationship with the capex cycle.",
+    "relatedCodes": ["8035", "6861"], "themeSlugs": ["semiconductor", "ai"]
+  },
+  {
+    "id": "v007", "category": "market", "durationSec": 486, "publishedAt": "2026-07-31T08:15:00+09:00", "viewCount": 64500,
+    "channelJa": "朝のマーケットメモ（サンプル）", "channelEn": "Morning Market Memo (Sample)",
+    "titleJa": "寄り前チェック：為替・米国市場・主要指数の確認手順（サンプル動画）",
+    "titleEn": "Pre-open checklist: FX, US markets and key indices (sample)",
+    "descriptionJa": "取引開始前に確認したい客観データの並べ方を紹介します。",
+    "descriptionEn": "How to line up the objective data worth checking before the open.",
+    "relatedCodes": ["8306"]
+  },
+  {
+    "id": "v008", "category": "beginner", "durationSec": 552, "publishedAt": "2026-07-30T17:05:00+09:00", "viewCount": 143700,
+    "channelJa": "はじめての株式投資（サンプル）", "channelEn": "Investing Basics (Sample)",
+    "titleJa": "単元株と最低投資金額：いくらから買えるのかを計算する（サンプル動画）",
+    "titleEn": "Trading units and minimum investment: how much you actually need (sample)",
+    "descriptionJa": "株価×単元株数で最低投資金額を計算する方法と、単元未満株の選択肢を説明します。",
+    "descriptionEn": "Calculating minimum investment from price × unit size, plus odd-lot options.",
+    "relatedCodes": ["7974"]
+  },
+  {
+    "id": "v009", "category": "ipo", "durationSec": 1105, "publishedAt": "2026-07-30T11:40:00+09:00", "viewCount": 51200,
+    "channelJa": "IPOウォッチ（サンプル）", "channelEn": "IPO Watch (Sample)",
+    "titleJa": "IPOの申込から上場までの流れ：目論見書で確認すべき項目（サンプル動画）",
+    "titleEn": "From book-building to listing: what to check in a prospectus (sample)",
+    "descriptionJa": "スケジュールの流れと、目論見書で確認すべき客観情報を整理します。当社は申込の仲介・推奨を行いません。",
+    "descriptionEn": "The timeline and objective items to check in a prospectus. We do not broker or recommend subscriptions."
+  },
+  {
+    "id": "v010", "category": "dividend", "durationSec": 664, "publishedAt": "2026-07-29T18:30:00+09:00", "viewCount": 119400,
+    "channelJa": "株主優待めぐり（サンプル）", "channelEn": "Shareholder Benefits Tour (Sample)",
+    "titleJa": "株主優待の総合利回りの考え方と、変更・廃止リスク（サンプル動画）",
+    "titleEn": "Total yield with shareholder benefits — and the risk of changes (sample)",
+    "descriptionJa": "配当利回りと優待利回りの合算の考え方、優待が変更・廃止される可能性について解説します。",
+    "descriptionEn": "How to think about combined yield, and the risk that benefits change or end.",
+    "relatedCodes": ["9433", "4502"]
+  },
+  {
+    "id": "v011", "category": "analysis", "durationSec": 1327, "publishedAt": "2026-07-28T21:00:00+09:00", "viewCount": 79600,
+    "channelJa": "企業分析ノート（サンプル）", "channelEn": "Company Analysis Notes (Sample)",
+    "titleJa": "総合商社のビジネスモデル：事業ポートフォリオの読み方（サンプル動画）",
+    "titleEn": "Trading houses: how to read a diversified portfolio (sample)",
+    "descriptionJa": "セグメント情報から事業構成を読み解く手順を解説します。",
+    "descriptionEn": "How to read business composition from segment disclosures.",
+    "relatedCodes": ["8058"]
+  },
+  {
+    "id": "v012", "category": "earnings", "durationSec": 905, "publishedAt": "2026-07-28T13:25:00+09:00", "viewCount": 68300,
+    "channelJa": "決算読み解きラボ（サンプル）", "channelEn": "Earnings Lab (Sample)",
+    "titleJa": "業績予想の修正はどう見るか：上方修正・下方修正の背景を確認する（サンプル動画）",
+    "titleEn": "Reading guidance revisions: what's behind upgrades and downgrades (sample)",
+    "descriptionJa": "修正の理由と、一時的要因か構造的要因かを切り分ける視点を紹介します。",
+    "descriptionEn": "Separating one-off factors from structural ones when guidance is revised.",
+    "relatedCodes": ["9984", "6098"]
+  }
+]

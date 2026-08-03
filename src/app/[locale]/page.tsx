@@ -8,8 +8,9 @@ import { buildMetadata } from "@/lib/seo";
 import { organizationLd, websiteLd, faqLd } from "@/lib/jsonld";
 import {
   getBenefitEntries, getIndices, getRanking, getRecentDisclosures, getSectorHeatmap,
-  getSpotlightStocks, getUpcomingEarnings, listStockSummaries, listThemes, getStocksByTheme,
+  getSpotlightStocks, getUpcomingEarnings, listStockSummaries, listThemes, getStocksByTheme, listVideos,
 } from "@/lib/queries";
+import { VideoCard } from "@/components/video/VideoCard";
 import { getProviders } from "@/lib/providers";
 import { priceChangePercent } from "@/lib/metrics";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
@@ -66,6 +67,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     .sort((a, b) => (b.totalYield ?? 0) - (a.totalYield ?? 0))
     .slice(0, 4);
   const disclosures = getRecentDisclosures(6);
+  const videos = listVideos().slice(0, 4);
 
   const segLabel = (s: string) => t.segments[s] ?? s;
   const toRow = (s: (typeof all)[number], metric: string) => ({
@@ -179,6 +181,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* ⑥ テーマ株 */}
       <ThemeGrid items={themeCards} locale={loc} />
+
+      {/* 動画ライブラリ */}
+      <section className="shell py-16 sm:py-20">
+        <SectionHeading
+          eyebrow="Video Library"
+          title={ja ? "動画で学ぶ・相場を追う" : "Learn and follow markets on video"}
+          description={ja ? "相場解説・決算の読み方・配当・新NISA・銘柄分析の動画をカテゴリー別に。（モックデータ）" : "Market commentary, earnings, dividends, NISA and analysis by category. (Mock data)"}
+          href={`/${loc}/videos`}
+          hrefLabel={ja ? "動画一覧へ" : "All videos"}
+        />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {videos.map((v, i) => (
+            <Reveal key={v.id} delay={i * 60}>
+              <VideoCard video={v} locale={loc} compact />
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       {/* ⑦ ニュース + 適時開示 */}
       <div className="bg-surface">

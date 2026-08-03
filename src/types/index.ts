@@ -227,6 +227,36 @@ export interface Broker {
   provenance: Provenance;
 }
 
+/** 動画カテゴリー（YouTube連携時も同じ区分にマッピングする） */
+export type VideoCategory =
+  | "market" // 相場解説
+  | "beginner" // 初心者向け
+  | "earnings" // 決算
+  | "dividend" // 配当・優待
+  | "analysis" // 銘柄分析
+  | "nisa" // 新NISA・制度
+  | "ipo"; // IPO
+
+export interface Video {
+  id: string;
+  /** YouTube動画ID。実データ接続時のみ設定され、存在する場合だけ埋め込み再生する。 */
+  youtubeId?: string;
+  titleJa: string;
+  titleEn: string;
+  descriptionJa: string;
+  descriptionEn: string;
+  channelJa: string;
+  channelEn: string;
+  channelId?: string;
+  category: VideoCategory;
+  durationSec: number;
+  publishedAt: string;
+  viewCount: number;
+  relatedCodes?: string[];
+  themeSlugs?: string[];
+  provenance: Provenance;
+}
+
 export type ArticleLevel = "beginner" | "intermediate" | "advanced";
 
 export interface Article {
