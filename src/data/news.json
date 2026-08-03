@@ -1,0 +1,50 @@
+[
+  {
+    "id": "n1", "category": "market", "publishedAt": "2026-08-03T08:40:00+09:00",
+    "titleJa": "日経平均は3日続伸、輸出関連が上げ主導（サンプル記事）",
+    "titleEn": "Nikkei rises for a third day, exporters lead (sample)",
+    "summaryJa": "前場の東京株式市場は主要輸出関連が買われ、指数は節目を挟んだ攻防となった。市場では次回決算発表を見極めたいとの声が聞かれた。",
+    "summaryEn": "Tokyo shares extended gains as major exporters advanced, with investors awaiting the next earnings season.",
+    "source": "Sample Data"
+  },
+  {
+    "id": "n2", "category": "earnings", "publishedAt": "2026-08-03T07:55:00+09:00",
+    "titleJa": "第1四半期決算、電気機器セクターで上方修正が相次ぐ（サンプル記事）",
+    "titleEn": "Q1 season: upward revisions cluster in electric appliances (sample)",
+    "summaryJa": "半導体製造装置を中心に会社予想の見直しが進む。設備投資サイクルの回復期待が背景との見方。",
+    "summaryEn": "Company guidance revisions concentrated in semiconductor equipment amid capex recovery expectations.",
+    "source": "Sample Data"
+  },
+  {
+    "id": "n3", "category": "policy", "publishedAt": "2026-08-02T18:20:00+09:00",
+    "titleJa": "長期金利の変動が銀行株の物色に影響（サンプル記事）",
+    "titleEn": "Long-term yields steer rotation into bank shares (sample)",
+    "summaryJa": "金利動向を手掛かりとした資金移動が続く。利ざや改善期待と貸出動向が引き続き注目される。",
+    "summaryEn": "Rate-driven rotation continued as investors watched margins and lending trends.",
+    "source": "Sample Data"
+  },
+  {
+    "id": "n4", "category": "dividend", "publishedAt": "2026-08-02T16:05:00+09:00",
+    "titleJa": "累進配当を掲げる企業が増加、株主還元方針の開示が拡充（サンプル記事）",
+    "titleEn": "More firms adopt progressive dividend policies (sample)",
+    "summaryJa": "減配を行わない方針を明示する企業が増え、配当方針の開示内容も詳細化している。",
+    "summaryEn": "A growing number of companies pledge not to cut dividends, with more detailed policy disclosure.",
+    "source": "Sample Data"
+  },
+  {
+    "id": "n5", "category": "ipo", "publishedAt": "2026-08-02T11:30:00+09:00",
+    "titleJa": "8月のIPOは中小型が中心、グロース市場への上場が続く（サンプル記事）",
+    "titleEn": "August IPOs skew small-cap, Growth market listings continue (sample)",
+    "summaryJa": "公開規模の小さい案件が中心。需給と初値形成に関心が集まっている。",
+    "summaryEn": "Smaller deals dominate the calendar as investors focus on supply-demand and debut pricing.",
+    "source": "Sample Data"
+  },
+  {
+    "id": "n6", "category": "market", "publishedAt": "2026-08-01T19:10:00+09:00",
+    "titleJa": "東証プライムの売買代金、月間で前月比増加（サンプル記事）",
+    "titleEn": "TSE Prime monthly turnover rises month-on-month (sample)",
+    "summaryJa": "指数寄与度の高い銘柄に売買が集中する傾向がみられた。",
+    "summaryEn": "Turnover concentrated in high index-weight names.",
+    "source": "Sample Data"
+  }
+]

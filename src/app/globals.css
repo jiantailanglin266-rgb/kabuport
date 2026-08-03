@@ -2,55 +2,201 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   KABUPORT Design System — Deep Navy × Gold
+   高級ホテルのラウンジのような静かな配色。フラット・弱い影・広い余白。
+   ============================================================ */
+
+/* セマンティック色は「R G B」の三値で保持し、Tailwind の /opacity 修飾子を使えるようにする */
 :root {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
-    "Noto Sans JP", "Yu Gothic", Meiryo, system-ui, sans-serif;
-  --bg: #f5f7fb;
-  --card: #ffffff;
-  --ink: #0b1b3a;
-  --muted: #5b6472;
-  --line: rgba(11, 27, 58, 0.1);
-  --accent: #2563eb;
+  --bg: 245 247 250;
+  --surface: 255 255 255;
+  --card: 255 255 255;
+  --elevated: 255 255 255;
+  --ink: 8 24 38;
+  --ink-2: 35 57 77;
+  --muted: 95 115 135;
+  --line: 229 234 242;
+  --line-strong: 212 220 232;
 }
 
 .dark {
-  --bg: #070b16;
-  --card: #0f1626;
-  --ink: #e8ecf5;
-  --muted: #96a0b5;
-  --line: rgba(255, 255, 255, 0.1);
-  --accent: #5c6bc0;
+  --bg: 5 15 26;
+  --surface: 8 24 38;
+  --card: 12 33 54;
+  --elevated: 16 43 70;
+  --ink: 242 246 251;
+  --ink-2: 211 221 232;
+  --muted: 144 164 184;
+  --line: 30 51 72;
+  --line-strong: 45 70 95;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-sans);
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: var(--font-noto), var(--font-inter), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 見出しは欧文ディスプレイ + 和文の2層 */
+h1, h2, h3, h4 {
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+::selection {
+  background: rgba(216, 180, 106, 0.28);
+}
+
+:focus-visible {
+  outline: 2px solid #1e88e5;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
 }
 
-/* 装飾: 抽象データグリッド背景 (控えめ) */
-.grid-bg {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 32px 32px;
+@layer components {
+  /* 共通レイアウトシェル */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  /* カード: 白 / 1px border / radius16 / 影は極薄 */
+  .card {
+    @apply rounded-2xl border border-line bg-card shadow-card;
+  }
+  .card-pad {
+    @apply p-6 sm:p-8;
+  }
+  .card-hover {
+    @apply transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift;
+  }
+
+  /* ボタン */
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl px-6 text-[15px] font-bold tracking-wide transition-all duration-300 ease-smooth;
+  }
+  .btn-lg {
+    @apply h-14 px-8 text-base;
+  }
+  .btn-gold {
+    @apply btn bg-gradient-to-b from-gold-400 to-gold text-navy shadow-gold hover:-translate-y-0.5 hover:from-gold hover:to-gold-600;
+  }
+  .btn-navy {
+    @apply btn bg-navy text-white hover:-translate-y-0.5 hover:bg-navy-600;
+  }
+  .btn-outline {
+    @apply btn border border-line-strong bg-card text-ink hover:-translate-y-0.5 hover:border-navy/40;
+  }
+  .btn-ghost-light {
+    @apply btn border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:-translate-y-0.5 hover:bg-white/12;
+  }
+
+  /* セクション見出し */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gold-600;
+  }
+  .section-title {
+    @apply text-[22px] font-bold tracking-tight text-ink sm:text-[26px];
+  }
+
+  /* 数値は等幅・欧文（.tabular は既存ページ互換のエイリアス） */
+  .num,
+  .tabular {
+    font-family: var(--font-inter), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.01em;
+  }
+
+  /* タグ / バッジ */
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs font-medium text-muted;
+  }
+  .chip-gold {
+    @apply inline-flex items-center gap-1 rounded-lg border border-gold/40 bg-gold/10 px-2.5 py-1 text-xs font-bold text-gold-600;
+  }
+
+  /* 罫線見出し（Bloomberg風の細い区切り） */
+  .rule-top {
+    @apply border-t border-line pt-3;
+  }
 }
 
-/* 数値の等幅表示 */
-.tabular {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
+@layer utilities {
+  /* 微細なグリッド背景（ダッシュボード面） */
+  .bg-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  /* 既存ページ互換（Phase1〜6のヒーロー等が参照） */
+  .grid-bg {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-grid-light {
+    background-image: linear-gradient(rgb(var(--line)) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line)) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  /* ヒーローの上品なグラデーション */
+  .bg-hero {
+    background:
+      radial-gradient(1200px 520px at 78% 8%, rgba(30, 136, 229, 0.22), transparent 62%),
+      radial-gradient(760px 420px at 8% 92%, rgba(216, 180, 106, 0.14), transparent 60%),
+      linear-gradient(168deg, #081826 0%, #0c2136 46%, #102b46 100%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* スクロールリビール初期状態（JS無効時も見えるようフォールバック付き） */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .no-js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  /* 横スクロール領域のスクロールバーを控えめに */
+  .scroll-x {
+    scrollbar-width: thin;
+  }
+  .scroll-x::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scroll-x::-webkit-scrollbar-thumb {
+    background: rgb(var(--line-strong));
+    border-radius: 99px;
+  }
+  .mask-fade-r {
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
 }

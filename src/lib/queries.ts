@@ -153,6 +153,36 @@ export function listIndustries() {
   return getProviders().company.listIndustries();
 }
 
+// ---- 業種別ヒートマップ（平均騰落率・時価総額でタイルを重み付け） ----
+export interface HeatmapCell {
+  code: string;
+  nameJa: string;
+  nameEn: string;
+  count: number;
+  avgChangePct: number;
+  totalMarketCap: number;
+}
+
+export function getSectorHeatmap(): HeatmapCell[] {
+  const industries = getProviders().company.listIndustries();
+  const all = listStockSummaries();
+  return industries
+    .map((ind) => {
+      const list = all.filter((s) => s.company.industryCode === ind.code);
+      const pcts = list.map((s) => s.changePct).filter((v): v is number => v !== null);
+      return {
+        code: ind.code,
+        nameJa: ind.nameJa,
+        nameEn: ind.nameEn,
+        count: list.length,
+        avgChangePct: pcts.length ? pcts.reduce((a, b) => a + b, 0) / pcts.length : 0,
+        totalMarketCap: list.reduce((sum, s) => sum + s.quote.marketCap, 0),
+      };
+    })
+    .filter((c) => c.count > 0)
+    .sort((a, b) => b.totalMarketCap - a.totalMarketCap);
+}
+
 export function listThemes() {
   return getProviders().company.listThemes();
 }

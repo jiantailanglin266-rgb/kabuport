@@ -44,7 +44,7 @@ export default async function SpotlightPage({ params }: { params: Promise<{ loca
       <Breadcrumbs items={[{ name: t.brand, path: "" }, { name: ja ? "チャート注目銘柄" : "Chart Spotlight", path: "spotlight" }]} locale={loc} />
 
       {/* ヒーロー */}
-      <section className="grid-bg -mx-4 rounded-b-3xl bg-gradient-to-br from-navy-900 via-navy to-navy-700 px-4 py-10 text-white">
+      <section className="bg-hero relative overflow-hidden rounded-3xl px-6 py-10 text-white sm:px-10">
         <div className="mx-auto max-w-3xl">
           <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium"><Sparkles size={13} /> {ja ? "テクニカル・スクリーン" : "Technical screen"}</span>
           <h1 className="mt-3 text-2xl font-bold sm:text-3xl">{ja ? "チャート注目銘柄" : "Chart Spotlight"}</h1>

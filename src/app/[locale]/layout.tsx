@@ -19,11 +19,13 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <LangSync locale={locale} />
       <Header locale={locale} />
-      <main className="mx-auto min-h-[60vh] max-w-6xl px-4 py-6">{children}</main>
+      <main id="main" className="flex-1">
+        {children}
+      </main>
       <Footer locale={locale} />
-    </>
+    </div>
   );
 }

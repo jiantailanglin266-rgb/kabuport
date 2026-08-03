@@ -1,0 +1,32 @@
+[
+  {
+    "code": "9001", "nameJa": "サンプル・テクノロジーズ", "nameEn": "Sample Technologies Inc.",
+    "status": "subscribing", "market": "growth", "businessJa": "産業向けAI画像解析SaaS", "businessEn": "Industrial AI vision SaaS",
+    "priceRangeLow": 1200, "priceRangeHigh": 1400, "listingDate": "2026-08-21", "bookOpen": "2026-08-05", "bookClose": "2026-08-12",
+    "sharesOffered": 1800000
+  },
+  {
+    "code": "9002", "nameJa": "サンプル・ヘルスケア", "nameEn": "Sample Healthcare Corp.",
+    "status": "subscribing", "market": "growth", "businessJa": "在宅医療プラットフォーム", "businessEn": "Home-care platform",
+    "priceRangeLow": 880, "priceRangeHigh": 980, "listingDate": "2026-08-25", "bookOpen": "2026-08-07", "bookClose": "2026-08-14",
+    "sharesOffered": 2400000
+  },
+  {
+    "code": "9003", "nameJa": "サンプル物流システム", "nameEn": "Sample Logistics Systems",
+    "status": "lottery", "market": "standard", "businessJa": "物流倉庫の自動化ロボット", "businessEn": "Warehouse automation robotics",
+    "priceRangeLow": 2100, "priceRangeHigh": 2300, "listingDate": "2026-08-19", "bookOpen": "2026-07-29", "bookClose": "2026-08-04",
+    "sharesOffered": 3200000
+  },
+  {
+    "code": "9004", "nameJa": "サンプル・フィナンシャル", "nameEn": "Sample Financial Group",
+    "status": "upcoming", "market": "prime", "businessJa": "中小企業向け決済・金融サービス", "businessEn": "SME payments and financing",
+    "priceRangeLow": 3200, "priceRangeHigh": 3600, "listingDate": "2026-09-04", "bookOpen": "2026-08-18", "bookClose": "2026-08-26",
+    "sharesOffered": 8600000
+  },
+  {
+    "code": "9005", "nameJa": "サンプル環境エナジー", "nameEn": "Sample Environmental Energy",
+    "status": "upcoming", "market": "growth", "businessJa": "分散型再エネ・蓄電システム", "businessEn": "Distributed renewables and storage",
+    "priceRangeLow": 1500, "priceRangeHigh": 1700, "listingDate": "2026-09-11", "bookOpen": "2026-08-24", "bookClose": "2026-09-01",
+    "sharesOffered": 2900000
+  }
+]
