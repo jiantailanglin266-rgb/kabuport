@@ -5,8 +5,11 @@ import type { ForecastType, Locale } from "@/types";
 import { getDictionary, isLocale, pick } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbLd, companyLd } from "@/lib/jsonld";
-import { getStockDetail, getVideosForCode, listAllCodes, listStockSummaries } from "@/lib/queries";
+import { getRsiForCode, getStockDetail, getVideosForCode, listAllCodes, listStockSummaries } from "@/lib/queries";
 import { VideoCard } from "@/components/video/VideoCard";
+import { RsiGauge, SignalBadge } from "@/components/signals/RsiGauge";
+import { RSI_LOWER, RSI_PERIOD, RSI_UPPER, rsiStateLabel } from "@/lib/rsi";
+import { Sparkline } from "@/components/Sparkline";
 import { getProviders } from "@/lib/providers";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
 import { PriceChange } from "@/components/PriceChange";
@@ -57,6 +60,8 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
   const seg = t.segments[c.segment] ?? c.segment;
   const peers = listStockSummaries().filter((p) => p.company.industryCode === c.industryCode && p.company.code !== c.code).slice(0, 3);
   const videos = getVideosForCode(code, 3);
+  const rsiEntry = getRsiForCode(code);
+  const rsiState = rsiStateLabel(rsiEntry?.rsi ?? null);
   const industry = getProviders().company.listIndustries().find((i) => i.code === c.industryCode);
   const industryName = industry ? pick(loc, industry.nameJa, industry.nameEn) : c.industryCode;
 
@@ -118,6 +123,46 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
           <Row k={loc === "ja" ? "52週安値" : "52w low"} val={formatYen(q.week52Low, loc)} />
         </dl>
       </section>
+
+      {/* テクニカル（RSI） */}
+      {rsiEntry && (
+        <section>
+          <SectionTitle>{loc === "ja" ? `テクニカル（日足RSI${RSI_PERIOD}）` : `Technical (daily RSI-${RSI_PERIOD})`}</SectionTitle>
+          <div className="rounded-2xl border border-line bg-card p-5">
+            <div className="grid gap-6 sm:grid-cols-[220px_1fr] sm:items-center">
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className="tabular text-[34px] font-extrabold leading-none text-ink">{rsiEntry.rsi?.toFixed(1) ?? "—"}</span>
+                  <span className="text-[12px] font-bold text-muted">RSI</span>
+                </div>
+                <div className="mt-1 text-[12px] text-muted">{pick(loc, rsiState.ja, rsiState.en)}</div>
+                <div className="mt-3">
+                  <SignalBadge signal={rsiEntry.signal} locale={loc} size="sm" />
+                </div>
+              </div>
+              <div>
+                <RsiGauge value={rsiEntry.rsi} locale={loc} />
+                <div className="mt-4">
+                  <Sparkline
+                    data={rsiEntry.closes.slice(-60)}
+                    width={520}
+                    height={54}
+                    ariaLabel={`${name} ${loc === "ja" ? "サンプル日足推移" : "sample daily trend"}`}
+                  />
+                </div>
+              </div>
+            </div>
+            <p className="mt-4 border-t border-line pt-3 text-[11px] leading-relaxed text-muted">
+              {loc === "ja"
+                ? `RSI > ${RSI_UPPER} を売りシグナル、RSI < ${RSI_LOWER} を買いシグナルとして機械的に判定しています（売買の推奨ではありません）。日足はサンプルデータです。`
+                : `RSI > ${RSI_UPPER} flags a sell signal and RSI < ${RSI_LOWER} a buy signal, mechanically (not a recommendation). Daily series is sample data.`}{" "}
+              <Link href={`/${loc}/signals`} className="font-bold text-brand hover:underline">
+                {loc === "ja" ? "シグナル一覧を見る" : "See all signals"}
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* 業績推移 */}
       <section>

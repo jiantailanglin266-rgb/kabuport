@@ -9,8 +9,12 @@ import { organizationLd, websiteLd, faqLd } from "@/lib/jsonld";
 import {
   getBenefitEntries, getIndices, getRanking, getRecentDisclosures, getSectorHeatmap,
   getSpotlightStocks, getUpcomingEarnings, listStockSummaries, listThemes, getStocksByTheme, listVideos,
+  getRsiEntries,
 } from "@/lib/queries";
 import { VideoCard } from "@/components/video/VideoCard";
+import { RsiGauge, SignalBadge } from "@/components/signals/RsiGauge";
+import { PriceChange } from "@/components/PriceChange";
+import { RSI_LOWER, RSI_PERIOD, RSI_UPPER } from "@/lib/rsi";
 import { getProviders } from "@/lib/providers";
 import { priceChangePercent } from "@/lib/metrics";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
@@ -68,6 +72,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     .slice(0, 4);
   const disclosures = getRecentDisclosures(6);
   const videos = listVideos().slice(0, 4);
+  const rsiEntries = getRsiEntries();
+  const rsiSells = rsiEntries.filter((e) => e.signal === "sell");
+  const rsiBuys = rsiEntries.filter((e) => e.signal === "buy");
+  const rsiHighlights = [...rsiSells.slice(0, 3), ...rsiBuys.slice(0, 3)];
 
   const segLabel = (s: string) => t.segments[s] ?? s;
   const toRow = (s: (typeof all)[number], metric: string) => ({
@@ -173,6 +181,60 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* ④ AI・定量分析 */}
       <QuantScores picks={spotlight} locale={loc} />
+
+      {/* RSI売買シグナル */}
+      <section className="shell py-16 sm:py-20">
+        <SectionHeading
+          eyebrow="RSI Signals"
+          title={ja ? "RSIシグナル銘柄" : "RSI signal screen"}
+          description={
+            ja
+              ? `日足RSI(${RSI_PERIOD})が${RSI_UPPER}超で売りシグナル、${RSI_LOWER}未満で買いシグナルとして機械的に抽出。算出式は全公開しています（売買推奨ではありません）。`
+              : `Mechanical screen: daily RSI(${RSI_PERIOD}) above ${RSI_UPPER} flags a sell signal, below ${RSI_LOWER} a buy signal. Formula disclosed; not a recommendation.`
+          }
+          href={`/${loc}/signals`}
+          hrefLabel={ja ? "シグナル一覧へ" : "All signals"}
+        />
+
+        <div className="mb-5 flex flex-wrap gap-3">
+          <span className="inline-flex items-center gap-2 rounded-xl border border-up/30 bg-up/10 px-4 py-2.5">
+            <SignalBadge signal="sell" locale={loc} size="sm" />
+            <span className="num text-[15px] font-extrabold text-ink">{rsiSells.length}</span>
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-xl border border-down/30 bg-down/10 px-4 py-2.5">
+            <SignalBadge signal="buy" locale={loc} size="sm" />
+            <span className="num text-[15px] font-extrabold text-ink">{rsiBuys.length}</span>
+          </span>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {rsiHighlights.map((e, i) => (
+            <Reveal key={e.summary.company.code} delay={i * 60}>
+              <Link href={`/${loc}/stocks/${e.summary.company.code}`} className="card card-hover flex h-full flex-col p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="truncate text-[15px] font-extrabold text-ink">
+                      {pick(loc, e.summary.company.nameJa, e.summary.company.nameEn)}
+                    </h3>
+                    <div className="num mt-0.5 text-[11px] text-muted">{e.summary.company.code}</div>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <div className="num text-[24px] font-extrabold leading-none text-ink">{e.rsi?.toFixed(1) ?? "—"}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-widest text-muted">RSI</div>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <RsiGauge value={e.rsi} locale={loc} showScale={false} />
+                </div>
+                <div className="mt-4 flex items-center justify-between rule-top">
+                  <SignalBadge signal={e.signal} locale={loc} size="sm" />
+                  <PriceChange change={e.summary.change} changePct={e.summary.changePct} size="sm" />
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       {/* ⑤ 業種ヒートマップ */}
       <div className="bg-surface">

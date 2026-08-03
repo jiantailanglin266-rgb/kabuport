@@ -20,6 +20,7 @@ export function buildNav(locale: Locale): NavItem[] {
     { label: ja ? "日本株" : "Stocks", href: `${b}/stocks` },
     { label: ja ? "ランキング" : "Rankings", href: `${b}/rankings` },
     { label: ja ? "AI・定量分析" : "Quant", href: `${b}/spotlight` },
+    { label: ja ? "売買シグナル" : "Signals", href: `${b}/signals` },
     { label: ja ? "スクリーニング" : "Screener", href: `${b}/stocks#screener` },
     { label: ja ? "テーマ株" : "Themes", href: `${b}/themes` },
     { label: ja ? "決算" : "Earnings", href: `${b}/earnings` },

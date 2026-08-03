@@ -16,6 +16,7 @@ export function Footer({ locale }: { locale: Locale }) {
         { label: ja ? "日本株を探す" : "Find stocks", href: `${b}/stocks` },
         { label: ja ? "ランキング" : "Rankings", href: `${b}/rankings` },
         { label: ja ? "AI・定量分析" : "Quant analysis", href: `${b}/spotlight` },
+        { label: ja ? "RSI売買シグナル" : "RSI signals", href: `${b}/signals` },
         { label: ja ? "銘柄比較" : "Compare", href: `${b}/compare` },
         { label: ja ? "業種別" : "Industries", href: `${b}/industries` },
         { label: ja ? "テーマ株" : "Themes", href: `${b}/themes` },

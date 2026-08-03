@@ -153,6 +153,41 @@ export function listIndustries() {
   return getProviders().company.listIndustries();
 }
 
+// ---- RSIシグナル（テクニカル自動抽出） ----
+import { dailyCloses } from "@/lib/series";
+import { rsi, rsiSignal, type RsiSignal } from "@/lib/rsi";
+
+export interface RsiEntry {
+  summary: StockSummary;
+  rsi: number | null;
+  signal: RsiSignal;
+  closes: number[];
+}
+
+function buildRsiEntry(s: StockSummary): RsiEntry {
+  const closes = dailyCloses({
+    code: s.company.code,
+    low: s.quote.week52Low,
+    high: s.quote.week52High,
+    price: s.quote.price,
+    previousClose: s.quote.previousClose,
+  });
+  const value = rsi(closes);
+  return { summary: s, rsi: value, signal: rsiSignal(value), closes };
+}
+
+/** 全銘柄のRSIとシグナル判定。RSIの高い順。 */
+export function getRsiEntries(): RsiEntry[] {
+  return listStockSummaries()
+    .map(buildRsiEntry)
+    .sort((a, b) => (b.rsi ?? -1) - (a.rsi ?? -1));
+}
+
+export function getRsiForCode(code: string): RsiEntry | undefined {
+  const s = listStockSummaries().find((x) => x.company.code === code);
+  return s ? buildRsiEntry(s) : undefined;
+}
+
 // ---- 動画 ----
 export function listVideos() {
   return getProviders().video.listVideos();
