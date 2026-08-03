@@ -15,6 +15,7 @@ export function Header({ locale }: { locale: Locale }) {
     { label: locale === "ja" ? "配当" : "Dividends", href: `${base}/dividends` },
     { label: locale === "ja" ? "優待" : "Benefits", href: `${base}/benefits` },
     { label: t.nav.earnings, href: `${base}/earnings` },
+    { label: locale === "ja" ? "証券会社" : "Brokers", href: `${base}/brokers` },
     { label: t.nav.learn, href: `${base}/learn` },
   ];
   return (

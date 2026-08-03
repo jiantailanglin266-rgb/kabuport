@@ -24,6 +24,7 @@ export function Footer({ locale }: { locale: Locale }) {
     { label: locale === "ja" ? "配当カレンダー" : "Dividend calendar", href: `/${locale}/dividends` },
     { label: locale === "ja" ? "株主優待" : "Benefits", href: `/${locale}/benefits` },
     { label: t.nav.earnings, href: `/${locale}/earnings` },
+    { label: locale === "ja" ? "証券会社比較" : "Brokers", href: `/${locale}/brokers` },
     { label: t.nav.learn, href: `/${locale}/learn` },
     { label: locale === "ja" ? "学習ロードマップ" : "Learning paths", href: `/${locale}/paths` },
     { label: locale === "ja" ? "用語集" : "Glossary", href: `/${locale}/glossary` },
