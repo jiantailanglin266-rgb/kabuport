@@ -10,6 +10,7 @@ export function Header({ locale }: { locale: Locale }) {
   const base = `/${locale}`;
   const nav = [
     { label: t.nav.stocks, href: `${base}/stocks` },
+    { label: locale === "ja" ? "注目銘柄" : "Spotlight", href: `${base}/spotlight` },
     { label: locale === "ja" ? "比較" : "Compare", href: `${base}/compare` },
     { label: t.nav.rankings, href: `${base}/rankings` },
     { label: locale === "ja" ? "配当" : "Dividends", href: `${base}/dividends` },

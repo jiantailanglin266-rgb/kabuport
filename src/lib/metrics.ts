@@ -81,6 +81,35 @@ export function deviationFromHigh(price: number, high: number): number | null {
   return ((price - high) / high) * 100;
 }
 
+function clamp01(v: number): number {
+  return Math.max(0, Math.min(1, v));
+}
+
+export interface TechnicalInput {
+  price: number;
+  previousClose: number;
+  week52High: number;
+  week52Low: number;
+}
+
+/**
+ * テクニカル注目度スコア (0-100)。客観的・決定的な算出。
+ * 「売買推奨」ではなく、チャート上の位置づけを可視化するための指標。
+ * - rangePos: 52週レンジ内の位置 (高値圏ほど高い) 50%
+ * - nearHigh: 52週高値への近さ 30%
+ * - dayMomentum: 前日比の勢い 20%
+ */
+export function technicalScore(q: TechnicalInput): number {
+  if (!nz(q.week52High) || !nz(q.week52Low) || q.week52High <= q.week52Low) return 0;
+  const rangePos = clamp01((q.price - q.week52Low) / (q.week52High - q.week52Low));
+  const dev = deviationFromHigh(q.price, q.week52High) ?? -100; // % (<=0)
+  const nearHigh = clamp01(1 + dev / 25); // 高値から-25%で0、高値で1
+  const pct = priceChangePercent(q.price, q.previousClose) ?? 0;
+  const dayMomentum = clamp01((pct + 3) / 6); // -3%..+3% → 0..1
+  const score = 100 * (0.5 * rangePos + 0.3 * nearHigh + 0.2 * dayMomentum);
+  return Math.round(score * 10) / 10;
+}
+
 /** 総合利回り (%) = 配当利回り + 優待利回り。片方欠損でも算出。両方欠損は null。 */
 export function totalYield(divYieldPct?: number, benefitYieldPct?: number): number | null {
   const a = nz(divYieldPct) ? divYieldPct : 0;

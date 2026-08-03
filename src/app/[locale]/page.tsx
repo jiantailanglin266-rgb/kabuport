@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CalendarClock, FileText, Gift, TrendingUp } from "lucide-react";
+import { ArrowRight, CalendarClock, FileText, Gift, LineChart, TrendingUp } from "lucide-react";
 import type { Locale } from "@/types";
 import { getDictionary, isLocale, pick } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 import { organizationLd, websiteLd, faqLd } from "@/lib/jsonld";
 import {
-  getBenefitStocks, getIndices, getRanking, getRecentDisclosures, getUpcomingEarnings,
+  getBenefitStocks, getIndices, getRanking, getRecentDisclosures, getSpotlightStocks, getUpcomingEarnings,
 } from "@/lib/queries";
+import { Sparkline } from "@/components/Sparkline";
 import { getProviders } from "@/lib/providers";
 import * as m from "@/lib/metrics";
 import { formatDate, formatNumber, formatRatio } from "@/lib/format";
@@ -32,6 +33,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = getDictionary(loc);
 
   const indices = getIndices();
+  const spotlight = getSpotlightStocks(3);
   const gainers = getRanking("gainers", 4);
   const losers = getRanking("losers", 4);
   const highYield = getRanking("yield", 4);
@@ -64,11 +66,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link href={`/${loc}/stocks`} className="inline-flex items-center gap-1 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy hover:bg-white/90">
               {t.cta.findStocks} <ArrowRight size={15} />
             </Link>
+            <Link href={`/${loc}/spotlight`} className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand to-brand-cyan px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90">
+              <LineChart size={15} /> {loc === "ja" ? "チャート注目銘柄" : "Chart Spotlight"}
+            </Link>
             <Link href={`/${loc}/rankings#yield`} className="rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10">
               {t.cta.highYield}
-            </Link>
-            <Link href={`/${loc}/earnings`} className="rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10">
-              {t.cta.earnings}
             </Link>
           </div>
           <p className="mt-4 text-[11px] text-white/60">{t.common.sampleData} ・ {t.home.disclaimerShort}</p>
@@ -91,6 +93,43 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           })}
         </div>
       </Section>
+
+      {/* チャート注目銘柄 (テクニカル・スクリーン) */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-ink">
+            <LineChart size={18} className="text-brand" />
+            {loc === "ja" ? "チャート注目銘柄" : "Chart Spotlight"}
+            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">{loc === "ja" ? "テクニカル・スクリーン" : "Technical screen"}</span>
+          </h2>
+          <Link href={`/${loc}/spotlight`} className="inline-flex items-center gap-0.5 text-sm text-brand hover:underline">
+            {loc === "ja" ? "すべて見る" : "See all"} <ArrowRight size={14} />
+          </Link>
+        </div>
+        <p className="text-xs text-muted">{loc === "ja" ? "52週レンジ内の位置・高値への近さ・前日比から算出した客観スコア。売買推奨ではありません。" : "Objective score from 52-week range position, proximity to highs and daily momentum. Not a recommendation."}</p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {spotlight.map((p, i) => {
+            const s = p.summary;
+            const name = pick(loc, s.company.nameJa, s.company.nameEn);
+            return (
+              <Link key={s.company.code} href={`/${loc}/stocks/${s.company.code}`} className="flex flex-col gap-2 rounded-2xl border border-line bg-card p-4 hover:border-brand">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className="grid h-5 w-5 place-items-center rounded-full bg-brand/10 text-[11px] font-bold text-brand">{i + 1}</span>
+                    <span className="truncate font-semibold text-ink">{name}</span>
+                  </div>
+                  <span className="shrink-0 rounded-md bg-navy px-2 py-0.5 text-[11px] font-bold text-white">{p.score.toFixed(0)}</span>
+                </div>
+                <Sparkline data={p.series} width={240} height={44} ariaLabel={`${name} ${loc === "ja" ? "サンプル値動き" : "sample trend"}`} />
+                <div className="flex items-end justify-between">
+                  <span className="tabular font-bold text-ink">{formatNumber(s.quote.price)}{loc === "ja" ? "円" : ""}</span>
+                  <PriceChange change={s.change} changePct={s.changePct} size="sm" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
 
       {/* 値上がり / 値下がり */}
       <div className="grid gap-8 lg:grid-cols-2">

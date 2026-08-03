@@ -17,6 +17,7 @@ export function Footer({ locale }: { locale: Locale }) {
   ];
   const explore = [
     { label: t.nav.stocks, href: `/${locale}/stocks` },
+    { label: locale === "ja" ? "チャート注目銘柄" : "Chart Spotlight", href: `/${locale}/spotlight` },
     { label: locale === "ja" ? "銘柄比較" : "Compare", href: `/${locale}/compare` },
     { label: t.nav.rankings, href: `/${locale}/rankings` },
     { label: locale === "ja" ? "業種" : "Industries", href: `/${locale}/industries` },

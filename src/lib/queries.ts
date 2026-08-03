@@ -157,6 +157,31 @@ export function listThemes() {
   return getProviders().company.listThemes();
 }
 
+// ---- チャート注目銘柄 (テクニカル・スクリーン。売買推奨ではない) ----
+import { priceSeries } from "@/lib/series";
+
+export interface SpotlightStock {
+  summary: StockSummary;
+  score: number;
+  series: number[];
+}
+
+export function getSpotlightStocks(limit = 6): SpotlightStock[] {
+  return listStockSummaries()
+    .map((summary) => ({
+      summary,
+      score: m.technicalScore({
+        price: summary.quote.price,
+        previousClose: summary.quote.previousClose,
+        week52High: summary.quote.week52High,
+        week52Low: summary.quote.week52Low,
+      }),
+      series: priceSeries(summary.company.code, summary.quote.week52Low, summary.quote.week52High, summary.quote.price),
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
 // ---- 株主優待データベース ----
 export interface BenefitEntry {
   summary: StockSummary;
