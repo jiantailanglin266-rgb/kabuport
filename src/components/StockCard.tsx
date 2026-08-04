@@ -4,6 +4,7 @@ import type { StockSummary } from "@/lib/queries";
 import { getDictionary, pick } from "@/lib/i18n";
 import { formatNumber, formatRatio, formatYenCompact, formatYen } from "@/lib/format";
 import { PriceChange } from "./PriceChange";
+import { CompanyLogo } from "./media/CompanyLogo";
 
 export function StockCard({ s, locale }: { s: StockSummary; locale: Locale }) {
   const t = getDictionary(locale);
@@ -13,8 +14,14 @@ export function StockCard({ s, locale }: { s: StockSummary; locale: Locale }) {
       href={`/${locale}/stocks/${s.company.code}`}
       className="group flex flex-col gap-2 rounded-2xl border border-line bg-card p-4 transition hover:border-brand hover:shadow-sm"
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
+      <div className="flex items-start gap-2.5">
+        <CompanyLogo
+          code={s.company.code}
+          fallbackText={s.company.logoText}
+          name={pick(locale, s.company.nameJa, s.company.nameEn)}
+          size={36}
+        />
+        <div className="min-w-0 flex-1">
           <div className="truncate font-semibold text-ink group-hover:text-brand">
             {pick(locale, s.company.nameJa, s.company.nameEn)}
           </div>
@@ -22,7 +29,6 @@ export function StockCard({ s, locale }: { s: StockSummary; locale: Locale }) {
             {s.company.code} ・ {seg}
           </div>
         </div>
-        <span className="shrink-0 rounded-md bg-line/50 px-1.5 py-0.5 text-[10px] font-medium text-muted">{s.company.logoText}</span>
       </div>
       <div className="flex items-end justify-between">
         <div className="tabular text-xl font-bold text-ink">{formatYen(s.quote.price, locale)}</div>

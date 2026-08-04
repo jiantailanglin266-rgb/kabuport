@@ -11,6 +11,7 @@ import { RsiGauge, SignalBadge } from "@/components/signals/RsiGauge";
 import { RSI_LOWER, RSI_PERIOD, RSI_UPPER, rsiStateLabel } from "@/lib/rsi";
 import { Sparkline } from "@/components/Sparkline";
 import { TradingViewWidget } from "@/components/market/TradingViewWidget";
+import { CompanyLogo } from "@/components/media/CompanyLogo";
 import { getProviders } from "@/lib/providers";
 import { formatDate, formatNumber, formatRatio, formatYen, formatYenCompact } from "@/lib/format";
 import { PriceChange } from "@/components/PriceChange";
@@ -74,7 +75,9 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
       {/* ヘッダー */}
       <header className="rounded-2xl border border-line bg-card p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
+          <div className="flex items-start gap-4">
+            <CompanyLogo code={code} fallbackText={c.logoText} name={name} size={56} className="mt-0.5" />
+            <div>
             <div className="flex items-center gap-2 text-xs text-muted">
               <span className="tabular rounded bg-line/50 px-1.5 py-0.5 font-medium text-ink">{code}</span>
               <span>{seg}</span>
@@ -83,6 +86,7 @@ export default async function StockDetailPage({ params }: { params: Promise<{ lo
             </div>
             <h1 className="mt-1 text-2xl font-bold text-ink">{name}</h1>
             <div className="text-sm text-muted">{pick(loc, c.nameEn, c.nameJa)}</div>
+            </div>
           </div>
           <div className="text-right">
             <div className="tabular text-3xl font-bold text-ink">{formatYen(q.price, loc)}</div>

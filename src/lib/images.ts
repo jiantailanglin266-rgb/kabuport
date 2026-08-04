@@ -4,6 +4,10 @@ import imagesRaw from "@/data/images.json";
 
 export interface CommonsImageMeta {
   key: string;
+  /** photo=日本国内で撮影された写真 / logo=自由ライセンスの企業ロゴ */
+  kind?: "photo" | "logo";
+  /** Commonsが記録している利用制限（商標など） */
+  restrictions?: string | null;
   title: string;
   /** Wikimedia 上の元URL（取り込みに失敗した場合のフォールバック） */
   url: string;
@@ -41,8 +45,21 @@ export function getSectorImage(code: string): CommonsImageMeta | undefined {
   return getImage(`sector:${code}`);
 }
 
+/** 銘柄コードに対応する企業ロゴ（Commonsに自由ライセンス版がある場合のみ）。 */
+export function getCompanyLogo(code: string): CommonsImageMeta | undefined {
+  return getImage(`logo:${code}`);
+}
+
 export function listImages(): CommonsImageMeta[] {
   return IMAGES;
+}
+
+export function listPhotos(): CommonsImageMeta[] {
+  return IMAGES.filter((i) => i.kind !== "logo");
+}
+
+export function listLogos(): CommonsImageMeta[] {
+  return IMAGES.filter((i) => i.kind === "logo");
 }
 
 /** 帰属表示の文字列（CC BY / BY-SA は作者とライセンスの明示が必須）。 */

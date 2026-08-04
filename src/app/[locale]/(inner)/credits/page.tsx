@@ -4,7 +4,7 @@ import { ExternalLink, ImageIcon } from "lucide-react";
 import type { Locale } from "@/types";
 import { getDictionary, isLocale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { listImages } from "@/lib/images";
+import { listLogos, listPhotos } from "@/lib/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CommonsImage } from "@/components/media/CommonsImage";
 
@@ -28,7 +28,8 @@ export default async function CreditsPage({ params }: { params: Promise<{ locale
   const loc = locale as Locale;
   const t = getDictionary(loc);
   const ja = loc === "ja";
-  const images = listImages();
+  const photos = listPhotos();
+  const logos = listLogos();
 
   return (
     <div className="mx-auto max-w-4xl space-y-8">
@@ -66,12 +67,24 @@ export default async function CreditsPage({ params }: { params: Promise<{ locale
               : "Licenses are verified at fetch time; only allow-listed licenses are accepted."}
           </li>
           <li>
+            <b className="text-ink">{ja ? "写真は日本国内で撮影されたものに限定しています。" : "Photos are limited to those taken in Japan."}</b>{" "}
+            {ja
+              ? "取り込み時に撮影地の座標（日本の緯度経度の範囲内か）で機械的に判定し、座標が無い場合は説明・カテゴリーの記載で確認しています。"
+              : "Verified mechanically by capture coordinates within Japan's bounding box, or by description/category when coordinates are absent."}
+          </li>
+          <li>
             <b className="text-ink">
-              {ja ? "企業ロゴ・商標は使用していません。" : "No company logos or trademarks are used."}
+              {ja ? "企業ロゴは、著作権フリーと明示されたもののみ使用しています。" : "Company logos are used only where explicitly free of copyright."}
             </b>{" "}
             {ja
-              ? "商標であることに加え、金融情報サイトでの掲載が提携・推奨の誤認を招くおそれがあるためです。"
-              : "They are trademarks, and using them on a financial information site could imply an affiliation or endorsement."}
+              ? "各言語版Wikipediaにあるフェアユース（再利用不可）のロゴは使用していません。Commons上で PD-textlogo 等と明示されたロゴのみを採用し、見つからない企業は頭文字で表示しています。"
+              : "Fair-use logos hosted on language Wikipedias are never used. Only logos marked free on Commons (e.g. PD-textlogo) are shown; companies without one fall back to initials."}
+          </li>
+          <li>
+            <b className="text-ink">{ja ? "ロゴは商標です。" : "Logos are trademarks."}</b>{" "}
+            {ja
+              ? "当サイトでの表示は、該当企業を識別する目的によるものであり、当サイトと各企業との提携・後援・推奨関係を示すものではありません。各商標はそれぞれの権利者に帰属します。"
+              : "They are shown to identify the company concerned and do not indicate any affiliation, sponsorship or endorsement. All trademarks belong to their respective owners."}
           </li>
           <li>
             {ja
@@ -81,12 +94,46 @@ export default async function CreditsPage({ params }: { params: Promise<{ locale
         </ul>
       </section>
 
+      {/* 企業ロゴ */}
+      {logos.length > 0 && (
+        <section>
+          <h2 className="section-title mb-2">{ja ? `企業ロゴ（${logos.length}点）` : `Company logos (${logos.length})`}</h2>
+          <p className="mb-5 text-[12px] text-muted">
+            {ja
+              ? "いずれも Wikimedia Commons 上で著作権フリーと明示されたものです。商標は各権利者に帰属します。"
+              : "All marked free of copyright on Wikimedia Commons. Trademarks belong to their respective owners."}
+          </p>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {logos.map((img) => (
+              <li key={img.key} className="card flex items-center gap-3 p-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-lg border border-line bg-white p-1">
+                  <CommonsImage image={img} alt={img.title} className="h-full w-full" overlay="none" credit="corner" imgClassName="object-contain" />
+                </span>
+                <div className="min-w-0">
+                  <a
+                    href={img.descriptionUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="block truncate text-[12.5px] font-bold text-ink hover:text-primary"
+                  >
+                    {img.title}
+                  </a>
+                  <div className="num text-[11px] text-muted">
+                    {img.key.replace("logo:", "")} ・ {img.license}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section>
         <h2 className="section-title mb-5">
-          {ja ? `使用画像一覧（${images.length}点）` : `Images used (${images.length})`}
+          {ja ? `写真（日本国内・${photos.length}点）` : `Photos taken in Japan (${photos.length})`}
         </h2>
         <ul className="grid gap-4 sm:grid-cols-2">
-          {images.map((img) => (
+          {photos.map((img) => (
             <li key={img.key} className="card overflow-hidden">
               <CommonsImage image={img} alt={img.title} className="h-32 w-full" overlay="none" credit="corner" />
               <div className="p-4">
