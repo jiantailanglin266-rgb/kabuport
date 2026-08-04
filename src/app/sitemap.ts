@@ -7,15 +7,18 @@ import glossaryRaw from "@/data/glossary.json";
 import pathsRaw from "@/data/learning-paths.json";
 import expertsRaw from "@/data/experts.json";
 import brokersRaw from "@/data/brokers.json";
+import { countByCategory, getCategories, getSources, listArticles, listNewsCompanies } from "@/lib/news";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "stocks", "spotlight", "signals", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "brokers", "videos", "learn", "paths", "glossary", "experts", "data", "credits", "about"];
+  const staticPaths = ["", "stocks", "spotlight", "signals", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "brokers", "videos", "news", "learn", "paths", "glossary", "experts", "data", "credits", "about"];
   const codes = listAllCodes();
   const slugs = articlesRaw.map((a) => a.slug);
   const industryCodes = listIndustries().map((i) => i.code);
   const themeSlugs = listThemes().map((th) => th.slug);
+
+  const newsCounts = countByCategory();
 
   const entries: MetadataRoute.Sitemap = [];
   for (const locale of LOCALES) {
@@ -29,6 +32,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const e of expertsRaw) entries.push({ url: localizedUrl(locale, `experts/${e.slug}`), changeFrequency: "monthly", priority: 0.4 });
     for (const b of brokersRaw) entries.push({ url: localizedUrl(locale, `brokers/${b.slug}`), changeFrequency: "weekly", priority: 0.6 });
     for (const id of listVideoIds()) entries.push({ url: localizedUrl(locale, `videos/${id}`), changeFrequency: "weekly", priority: 0.5 });
+    // ニュース: 記事・カテゴリー別・配信元別・企業別
+    for (const a of listArticles()) entries.push({ url: localizedUrl(locale, `news/${a.slug}`), changeFrequency: "daily", priority: 0.6, lastModified: a.publishedAt });
+    for (const c of getCategories()) {
+      if ((newsCounts[c.slug] ?? 0) > 0) entries.push({ url: localizedUrl(locale, `news/category/${c.slug}`), changeFrequency: "daily", priority: 0.6 });
+    }
+    for (const s2 of getSources()) entries.push({ url: localizedUrl(locale, `news/source/${s2.slug}`), changeFrequency: "daily", priority: 0.5 });
+    for (const c of listNewsCompanies()) entries.push({ url: localizedUrl(locale, `news/company/${c.code}`), changeFrequency: "daily", priority: 0.5 });
   }
   return entries;
 }

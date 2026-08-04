@@ -51,6 +51,7 @@ export function ThemeGrid({ items, locale }: { items: ThemeCardData[]; locale: L
                       className="h-full w-full"
                       imgClassName="transition-transform duration-700 ease-smooth group-hover:scale-105"
                       overlay="strong"
+                      linkCredit={false}
                     />
                   ) : (
                     <div className="h-full w-full bg-gradient-to-br from-navy-700 to-navy-500" aria-hidden />

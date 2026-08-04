@@ -19,7 +19,9 @@
     "data:build": "node scripts/build-market-data.mjs",
     "data:validate": "node scripts/validate-market-data.mjs",
     "data:all": "npm run data:listed && npm run data:prices && npm run data:financials && npm run data:edinet && npm run data:build && npm run data:validate",
-    "data:images": "node scripts/fetch-commons-images.mjs"
+    "data:images": "node scripts/fetch-commons-images.mjs",
+    "news:demo": "node scripts/generate-demo-news.mjs",
+    "news:fetch": "node scripts/fetch-rss.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -36,6 +38,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
+    "fast-xml-parser": "^5.10.1",
     "postcss": "^8.5.1",
     "server-only": "^0.0.1",
     "tailwindcss": "^3.4.17",

@@ -39,6 +39,13 @@ jobs:
       JQUANTS_PASSWORD: ${{ secrets.JQUANTS_PASSWORD }}
       JQUANTS_PLAN: ${{ vars.JQUANTS_PLAN || 'free' }}
       EDINET_API_KEY: ${{ secrets.EDINET_API_KEY }}
+      # RSS配信元（未設定ならデモデータで動作）
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+      RSS_FEED_MARKET_1: ${{ secrets.RSS_FEED_MARKET_1 }}
+      RSS_FEED_MARKET_2: ${{ secrets.RSS_FEED_MARKET_2 }}
+      RSS_FEED_COMPANY_1: ${{ secrets.RSS_FEED_COMPANY_1 }}
+      RSS_FEED_ECONOMY_1: ${{ secrets.RSS_FEED_ECONOMY_1 }}
+      RSS_FEED_DISCLOSURE_1: ${{ secrets.RSS_FEED_DISCLOSURE_1 }}
       # 公開サイトへの再配信可否（利用規約を確認できた場合のみ 'confirmed' を設定する）
       JQUANTS_PUBLIC_REDISTRIBUTION: ${{ vars.JQUANTS_PUBLIC_REDISTRIBUTION }}
       EDINET_PUBLIC_REDISTRIBUTION: ${{ vars.EDINET_PUBLIC_REDISTRIBUTION }}
@@ -79,6 +86,10 @@ jobs:
 
       - name: Fetch EDINET documents
         run: node scripts/fetch-edinet-documents.mjs
+
+      # RSSニュース取得（Cron相当。配信元が未設定ならデモデータを書き出す）
+      - name: Fetch RSS news
+        run: node scripts/fetch-rss.mjs
 
       # --- 正規化・検証 ---
       - name: Build public dataset

@@ -25,6 +25,7 @@ export function Footer({ locale }: { locale: Locale }) {
     {
       title: ja ? "投資データ" : "Data",
       links: [
+        { label: ja ? "株式投資ニュース" : "Investing news", href: `${b}/news` },
         { label: ja ? "決算カレンダー" : "Earnings calendar", href: `${b}/earnings` },
         { label: ja ? "配当カレンダー" : "Dividend calendar", href: `${b}/dividends` },
         { label: ja ? "株主優待" : "Shareholder benefits", href: `${b}/benefits` },

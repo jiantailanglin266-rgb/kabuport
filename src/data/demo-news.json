@@ -1,0 +1,1766 @@
+{
+  "generatedAt": "2026-08-04T00:00:00.000Z",
+  "isDemo": true,
+  "sources": [
+    {
+      "id": "demo-market",
+      "name": "サンプル市況ニュース",
+      "slug": "demo-market",
+      "siteUrl": "https://example.com/market",
+      "priority": 90,
+      "trustLevel": 3,
+      "feedUrl": "https://example.com/market/rss.xml",
+      "language": "ja",
+      "isActive": true,
+      "fetchIntervalMinutes": 30,
+      "imageUsageAllowed": false,
+      "commercialUseAllowed": false,
+      "termsNote": "デモ用のサンプル配信元です。実在の配信元ではありません。",
+      "consecutiveErrors": 0,
+      "lastFetchedAt": "2026-08-03T23:48:00.000Z",
+      "lastSuccessAt": "2026-08-03T23:48:00.000Z"
+    },
+    {
+      "id": "demo-company",
+      "name": "サンプル企業ニュース",
+      "slug": "demo-company",
+      "siteUrl": "https://example.com/company",
+      "priority": 80,
+      "trustLevel": 3,
+      "feedUrl": "https://example.com/company/rss.xml",
+      "language": "ja",
+      "isActive": true,
+      "fetchIntervalMinutes": 30,
+      "imageUsageAllowed": false,
+      "commercialUseAllowed": false,
+      "termsNote": "デモ用のサンプル配信元です。実在の配信元ではありません。",
+      "consecutiveErrors": 0,
+      "lastFetchedAt": "2026-08-03T23:48:00.000Z",
+      "lastSuccessAt": "2026-08-03T23:48:00.000Z"
+    },
+    {
+      "id": "demo-economy",
+      "name": "サンプル経済ニュース",
+      "slug": "demo-economy",
+      "siteUrl": "https://example.com/economy",
+      "priority": 70,
+      "trustLevel": 3,
+      "feedUrl": "https://example.com/economy/rss.xml",
+      "language": "ja",
+      "isActive": true,
+      "fetchIntervalMinutes": 30,
+      "imageUsageAllowed": false,
+      "commercialUseAllowed": false,
+      "termsNote": "デモ用のサンプル配信元です。実在の配信元ではありません。",
+      "consecutiveErrors": 0,
+      "lastFetchedAt": "2026-08-03T23:48:00.000Z",
+      "lastSuccessAt": "2026-08-03T23:48:00.000Z"
+    },
+    {
+      "id": "demo-disclosure",
+      "name": "サンプル適時開示",
+      "slug": "demo-disclosure",
+      "siteUrl": "https://example.com/disclosure",
+      "priority": 95,
+      "trustLevel": 4,
+      "feedUrl": "https://example.com/disclosure/rss.xml",
+      "language": "ja",
+      "isActive": true,
+      "fetchIntervalMinutes": 30,
+      "imageUsageAllowed": false,
+      "commercialUseAllowed": false,
+      "termsNote": "デモ用のサンプル配信元です。実在の配信元ではありません。",
+      "consecutiveErrors": 0,
+      "lastFetchedAt": "2026-08-03T23:48:00.000Z",
+      "lastSuccessAt": "2026-08-03T23:48:00.000Z"
+    },
+    {
+      "id": "demo-global",
+      "name": "サンプル海外市場ニュース",
+      "slug": "demo-global",
+      "siteUrl": "https://example.com/global",
+      "priority": 60,
+      "trustLevel": 3,
+      "feedUrl": "https://example.com/global/rss.xml",
+      "language": "ja",
+      "isActive": true,
+      "fetchIntervalMinutes": 30,
+      "imageUsageAllowed": false,
+      "commercialUseAllowed": false,
+      "termsNote": "デモ用のサンプル配信元です。実在の配信元ではありません。",
+      "consecutiveErrors": 0,
+      "lastFetchedAt": "2026-08-03T23:48:00.000Z",
+      "lastSuccessAt": "2026-08-03T23:48:00.000Z"
+    }
+  ],
+  "categories": [
+    {
+      "slug": "earnings",
+      "nameJa": "決算",
+      "nameEn": "Earnings",
+      "sortOrder": 1,
+      "isActive": true
+    },
+    {
+      "slug": "guidance",
+      "nameJa": "業績修正",
+      "nameEn": "Guidance revision",
+      "sortOrder": 2,
+      "isActive": true
+    },
+    {
+      "slug": "dividend",
+      "nameJa": "配当",
+      "nameEn": "Dividends",
+      "sortOrder": 3,
+      "isActive": true
+    },
+    {
+      "slug": "benefits",
+      "nameJa": "株主優待",
+      "nameEn": "Shareholder benefits",
+      "sortOrder": 4,
+      "isActive": true
+    },
+    {
+      "slug": "buyback",
+      "nameJa": "自社株買い",
+      "nameEn": "Buyback",
+      "sortOrder": 5,
+      "isActive": true
+    },
+    {
+      "slug": "split",
+      "nameJa": "株式分割",
+      "nameEn": "Stock split",
+      "sortOrder": 6,
+      "isActive": true
+    },
+    {
+      "slug": "tob",
+      "nameJa": "TOB・MBO",
+      "nameEn": "TOB / MBO",
+      "sortOrder": 7,
+      "isActive": true
+    },
+    {
+      "slug": "ma",
+      "nameJa": "M&A",
+      "nameEn": "M&A",
+      "sortOrder": 8,
+      "isActive": true
+    },
+    {
+      "slug": "ipo",
+      "nameJa": "IPO",
+      "nameEn": "IPO",
+      "sortOrder": 9,
+      "isActive": true
+    },
+    {
+      "slug": "delisting",
+      "nameJa": "上場廃止",
+      "nameEn": "Delisting",
+      "sortOrder": 10,
+      "isActive": true
+    },
+    {
+      "slug": "stocks",
+      "nameJa": "個別銘柄",
+      "nameEn": "Single stocks",
+      "sortOrder": 11,
+      "isActive": true
+    },
+    {
+      "slug": "market",
+      "nameJa": "株式市場",
+      "nameEn": "Stock market",
+      "sortOrder": 12,
+      "isActive": true
+    },
+    {
+      "slug": "japan_equity",
+      "nameJa": "日本株",
+      "nameEn": "Japanese equities",
+      "sortOrder": 13,
+      "isActive": true
+    },
+    {
+      "slug": "forex",
+      "nameJa": "為替",
+      "nameEn": "Forex",
+      "sortOrder": 14,
+      "isActive": true
+    },
+    {
+      "slug": "rates",
+      "nameJa": "金利",
+      "nameEn": "Interest rates",
+      "sortOrder": 15,
+      "isActive": true
+    },
+    {
+      "slug": "boj",
+      "nameJa": "日銀",
+      "nameEn": "Bank of Japan",
+      "sortOrder": 16,
+      "isActive": true
+    },
+    {
+      "slug": "monetary_policy",
+      "nameJa": "金融政策",
+      "nameEn": "Monetary policy",
+      "sortOrder": 17,
+      "isActive": true
+    },
+    {
+      "slug": "economy",
+      "nameJa": "日本経済",
+      "nameEn": "Japan economy",
+      "sortOrder": 18,
+      "isActive": true
+    },
+    {
+      "slug": "indicators",
+      "nameJa": "経済指標",
+      "nameEn": "Economic indicators",
+      "sortOrder": 19,
+      "isActive": true
+    },
+    {
+      "slug": "us_equity",
+      "nameJa": "米国株",
+      "nameEn": "US equities",
+      "sortOrder": 20,
+      "isActive": true
+    },
+    {
+      "slug": "global",
+      "nameJa": "海外市場",
+      "nameEn": "Global markets",
+      "sortOrder": 21,
+      "isActive": true
+    },
+    {
+      "slug": "etf",
+      "nameJa": "ETF",
+      "nameEn": "ETF",
+      "sortOrder": 22,
+      "isActive": true
+    },
+    {
+      "slug": "reit",
+      "nameJa": "REIT",
+      "nameEn": "REIT",
+      "sortOrder": 23,
+      "isActive": true
+    },
+    {
+      "slug": "fund",
+      "nameJa": "投資信託",
+      "nameEn": "Investment trusts",
+      "sortOrder": 24,
+      "isActive": true
+    },
+    {
+      "slug": "scandal",
+      "nameJa": "不祥事",
+      "nameEn": "Misconduct",
+      "sortOrder": 25,
+      "isActive": true
+    }
+  ],
+  "companies": [
+    {
+      "code": "9001",
+      "name": "サンプル・テクノロジーズ"
+    },
+    {
+      "code": "9002",
+      "name": "サンプル・ヘルスケア"
+    },
+    {
+      "code": "9003",
+      "name": "サンプル物流システム"
+    },
+    {
+      "code": "9004",
+      "name": "サンプル・フィナンシャル"
+    },
+    {
+      "code": "9005",
+      "name": "サンプル環境エナジー"
+    },
+    {
+      "code": "9006",
+      "name": "サンプル精密機器"
+    },
+    {
+      "code": "9007",
+      "name": "サンプル商事"
+    },
+    {
+      "code": "9008",
+      "name": "サンプル食品"
+    },
+    {
+      "code": "9009",
+      "name": "サンプル電子"
+    },
+    {
+      "code": "9010",
+      "name": "サンプル建設"
+    }
+  ],
+  "articles": [
+    {
+      "id": "demo-001",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-001",
+      "title": "サンプル・テクノロジーズ、2027年3月期の業績予想を上方修正 営業利益は従来予想を上回る見通し",
+      "slug": "20260803-20273-960034c5",
+      "summary": "サンプル・テクノロジーズは通期の売上高および営業利益の予想を修正したと発表しました。詳細は配信元の記事をご確認ください。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-001",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-001",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T23:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "11a2d771bbb49547a2808c2278d0552ae35db9acc60519e9eefb3a59047dc91e",
+      "urlHash": "960034c55573bbec83ad517feb6157beee08e87e2faae9ce99806cdc6f11b2fc",
+      "importanceScore": 61,
+      "status": "published",
+      "isFeatured": true,
+      "isBreaking": true,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "guidance",
+          "confidence": 0.81
+        },
+        {
+          "slug": "earnings",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9001",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・テクノロジーズ"
+        }
+      ]
+    },
+    {
+      "id": "demo-002",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-002",
+      "title": "サンプル・ヘルスケア、期末配当を増配へ 年間配当は前期比で増加",
+      "slug": "20260803-news-ca7a9b28",
+      "summary": "サンプル・ヘルスケアは剰余金の配当について、期末配当予想の修正を発表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-002",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-002",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T22:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "87f27a321f3247fd94da41004b9f20c2cf1d5c3552c9530e8c6f75f2597e34cb",
+      "urlHash": "ca7a9b28e74a18e18bccfab1f1c36c0893bec38a0432cf61ff5b66c1cf00613e",
+      "importanceScore": 43,
+      "status": "published",
+      "isFeatured": true,
+      "isBreaking": true,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "dividend",
+          "confidence": 0.95
+        }
+      ],
+      "companies": [
+        {
+          "code": "9002",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・ヘルスケア"
+        }
+      ]
+    },
+    {
+      "id": "demo-003",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-003",
+      "title": "サンプル物流システム、自己株式の取得を決議 取得上限は発行済株式総数の一定割合",
+      "slug": "20260803-news-1ae3d868",
+      "summary": "サンプル物流システムは自己株式の取得に係る事項について決議したと発表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-003",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-003",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T21:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "153a71b6b21fdb8c2dc6774ab7f4c547452176ee33f9bc04119aeb60b2dcae5e",
+      "urlHash": "1ae3d868cb87d1d00d7b9fc3398a7d211f96fc0bf34abee2425208764d66ca49",
+      "importanceScore": 35,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "buyback",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9003",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル物流システム"
+        }
+      ]
+    },
+    {
+      "id": "demo-004",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-004",
+      "title": "サンプル・フィナンシャル、株式分割を実施へ 投資単位の引き下げが目的",
+      "slug": "20260803-news-4040d65b",
+      "summary": "サンプル・フィナンシャルは株式分割および定款の一部変更について発表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-004",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-004",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T19:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "7cd238386ff17457471223b6dbbc9e7e1569bb74cefc3ba8d2442d27b0480f41",
+      "urlHash": "4040d65b3812bb21bd73de91325b439f8ebaa73e29060d71d19e83c909ad028a",
+      "importanceScore": 32,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "split",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9004",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・フィナンシャル"
+        }
+      ]
+    },
+    {
+      "id": "demo-005",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-005",
+      "title": "サンプル環境エナジー、株主優待制度を新設 長期保有者向けの優遇も",
+      "slug": "20260803-news-0eac427b",
+      "summary": "サンプル環境エナジーは株主優待制度の新設について発表しました。内容は変更される可能性があります。",
+      "originalUrl": "https://example.com/company/articles/demo-005",
+      "canonicalUrl": "https://example.com/company/articles/demo-005",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T17:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "65e004d646c10d63dda54f0dbd6eabd15ebda4e91e62db417387489d27cd83ce",
+      "urlHash": "0eac427b3a772df943388dd3586306c556b0e885d59df897c671a11fdd2aa390",
+      "importanceScore": 24,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "benefits",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9005",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル環境エナジー"
+        }
+      ]
+    },
+    {
+      "id": "demo-006",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-006",
+      "title": "サンプル精密機器に対する公開買付け（TOB）を開始 完全子会社化を目指す",
+      "slug": "20260803-tob-7e2fcbbd",
+      "summary": "サンプル精密機器に対する公開買付けの開始が発表されました。詳細は配信元をご確認ください。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-006",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-006",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T15:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "482105a4390c9b7ad27cd9ee6853539229bfcd3d959ca1c80d5f006a72778a8f",
+      "urlHash": "7e2fcbbd4734274b9e28a19d1fa83416cf9f90e5fb4f6d51b457b715f3d2ddfb",
+      "importanceScore": 64,
+      "status": "published",
+      "isFeatured": true,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "tob",
+          "confidence": 0.95
+        },
+        {
+          "slug": "ma",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9006",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル精密機器"
+        }
+      ]
+    },
+    {
+      "id": "demo-007",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-007",
+      "title": "サンプル商事、同業他社との資本業務提携を発表 事業領域の拡大へ",
+      "slug": "20260803-news-af43144b",
+      "summary": "サンプル商事は資本業務提携について発表しました。",
+      "originalUrl": "https://example.com/company/articles/demo-007",
+      "canonicalUrl": "https://example.com/company/articles/demo-007",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T13:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "249143d5a635b125365ecfed855e9f7eb252c5ecd887811696e8857f5de26abf",
+      "urlHash": "af43144bdf56cc75a47cc8f9ebfdf2b91e1490330b00e2a1fc18969fa122e96f",
+      "importanceScore": 30,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "ma",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9007",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル商事"
+        }
+      ]
+    },
+    {
+      "id": "demo-008",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-008",
+      "title": "サンプル食品の第1四半期決算、営業利益は前年同期比で増益",
+      "slug": "20260803-1-4d09f0f9",
+      "summary": "サンプル食品の四半期決算が発表されました。会社予想との比較は配信元記事をご確認ください。",
+      "originalUrl": "https://example.com/company/articles/demo-008",
+      "canonicalUrl": "https://example.com/company/articles/demo-008",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T11:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "49c0733d5306273701c0167e404c483d81c072c8ba0ac14b0722c8cb3750b36d",
+      "urlHash": "4d09f0f9c49984113bcfa26d57d8f9ce803ce4cc3d0f9b7b350f6b157c510955",
+      "importanceScore": 39,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "earnings",
+          "confidence": 0.95
+        }
+      ],
+      "companies": [
+        {
+          "code": "9008",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル食品"
+        }
+      ]
+    },
+    {
+      "id": "demo-009",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-009",
+      "title": "サンプル電子、通期の業績予想を下方修正 原材料価格の影響",
+      "slug": "20260803-news-9b88ce49",
+      "summary": "サンプル電子は業績予想の修正について発表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-009",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-009",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T08:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "638bd4f6aac2d59020a2a5c93bbc1f60bed1da81ce0d8c0126fa39fb96f9e294",
+      "urlHash": "9b88ce4927b6116f0a8cd217e39b95cc8297047b207a52040f0ffa4e7dcd3685",
+      "importanceScore": 36,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "guidance",
+          "confidence": 0.81
+        }
+      ],
+      "companies": [
+        {
+          "code": "9009",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル電子"
+        }
+      ]
+    },
+    {
+      "id": "demo-010",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-010",
+      "title": "サンプル建設株が年初来高値を更新 好決算を受けた買いが継続",
+      "slug": "20260803-news-5f022480",
+      "summary": "サンプル建設の株価が年初来高値を更新しました。株価は変動します。",
+      "originalUrl": "https://example.com/market/articles/demo-010",
+      "canonicalUrl": "https://example.com/market/articles/demo-010",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T06:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "f26e856b3a534cae4bf794658ba80b559c2d92265263d8923f48ea71c1145916",
+      "urlHash": "5f022480db007c686bd6c1ea31b9b44d230ef94760102be7cfa0ea90c10863b2",
+      "importanceScore": 37,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "stocks",
+          "confidence": 0.81
+        },
+        {
+          "slug": "earnings",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9010",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル建設"
+        }
+      ]
+    },
+    {
+      "id": "demo-011",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-011",
+      "title": "サンプル・テクノロジーズ、新規上場（IPO）を申請 グロース市場への上場を目指す",
+      "slug": "20260803-ipo-ddc1f28e",
+      "summary": "サンプル・テクノロジーズの新規上場が承認されたと発表されました。",
+      "originalUrl": "https://example.com/company/articles/demo-011",
+      "canonicalUrl": "https://example.com/company/articles/demo-011",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T04:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "c0b76a2febfb3123ddd08679b3f70a9e22e35c31c0204e23cf51f62019c88f00",
+      "urlHash": "ddc1f28e58d007f9244ca1831b09488deb18c5c3c05f8384e95f65365f439d02",
+      "importanceScore": 31,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "ipo",
+          "confidence": 0.81
+        },
+        {
+          "slug": "market",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9001",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・テクノロジーズ"
+        }
+      ]
+    },
+    {
+      "id": "demo-012",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-012",
+      "title": "サンプル・ヘルスケア、決算説明会で中期経営計画の進捗を説明",
+      "slug": "20260803-news-ca93a186",
+      "summary": "サンプル・ヘルスケアは決算説明会を開催し、事業方針について説明しました。",
+      "originalUrl": "https://example.com/company/articles/demo-012",
+      "canonicalUrl": "https://example.com/company/articles/demo-012",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T01:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "3e35089729cf7befd7e620c9259dec2c2e972c6b60bdfd9e3ac14c2de0731794",
+      "urlHash": "ca93a18638c849baabf28cc18182ab53af1af81ffb176a14e007504869c04e65",
+      "importanceScore": 29,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "earnings",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9002",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・ヘルスケア"
+        }
+      ]
+    },
+    {
+      "id": "demo-013",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-013",
+      "title": "日経平均は続伸、輸出関連が上げ主導 売買代金は前日を上回る",
+      "slug": "20260803-news-9213057c",
+      "summary": "東京株式市場では主要輸出関連が買われ、指数は上昇しました。",
+      "originalUrl": "https://example.com/market/articles/demo-013",
+      "canonicalUrl": "https://example.com/market/articles/demo-013",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T20:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "66ed930866242747be5825b649ddd29d54e225aea5c40a4a8c60af3d59d16770",
+      "urlHash": "9213057c52e4a472fd68f646049438e13eb4a7e468cee683acb5428fa1dc2701",
+      "importanceScore": 24,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "market",
+          "confidence": 0.81
+        },
+        {
+          "slug": "japan_equity",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-014",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-014",
+      "title": "東証プライムの売買代金が増加 決算発表シーズンで商いが膨らむ",
+      "slug": "20260803-news-be2b24a2",
+      "summary": "決算発表が集中する時期を迎え、売買代金が増加しています。",
+      "originalUrl": "https://example.com/market/articles/demo-014",
+      "canonicalUrl": "https://example.com/market/articles/demo-014",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T18:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "41f74dd33a359f0082f00e58f9209f6f0ce95dad2345ee892d702befdbedfb1f",
+      "urlHash": "be2b24a28d3b9fe048f548e3e56ba9fe0f9a7d0c1a69d437affa34723919fdc5",
+      "importanceScore": 39,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "market",
+          "confidence": 0.95
+        },
+        {
+          "slug": "earnings",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-015",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-015",
+      "title": "TOPIXは小幅安、銀行株が軟調 金利動向を意識した動き",
+      "slug": "20260803-topix-f4578796",
+      "summary": "TOPIXは小幅に下落しました。セクター別では銀行株が軟調でした。",
+      "originalUrl": "https://example.com/market/articles/demo-015",
+      "canonicalUrl": "https://example.com/market/articles/demo-015",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T16:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "59a8b14edaa841de4bc5a73ade57afa15dcb2ce16803ee37826cc6c2fcc43891",
+      "urlHash": "f4578796dcf2ac838a60342ce60b1e98878206dac106d8a1c6979ccc8d6ce5ab",
+      "importanceScore": 20,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "rates",
+          "confidence": 0.63
+        },
+        {
+          "slug": "market",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-016",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-016",
+      "title": "東証グロース市場指数が反発 中小型株に見直し買い",
+      "slug": "20260803-news-883355f1",
+      "summary": "グロース市場の指数は反発しました。",
+      "originalUrl": "https://example.com/market/articles/demo-016",
+      "canonicalUrl": "https://example.com/market/articles/demo-016",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T12:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "aa8255a0ba1f9b33f35fbf3ce0549d2811d7f20f0be04c372f84d408bc2a60fa",
+      "urlHash": "883355f10b707c326237be48beb2cc02c2c89dc46c37a93b879ee4b6be6faacf",
+      "importanceScore": 12,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "market",
+          "confidence": 0.81
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-017",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-017",
+      "title": "日銀、金融政策決定会合で現状維持を決定 今後の政策運営に注目",
+      "slug": "20260803-news-3cafd699",
+      "summary": "日本銀行は金融政策決定会合の結果を公表しました。",
+      "originalUrl": "https://example.com/economy/articles/demo-017",
+      "canonicalUrl": "https://example.com/economy/articles/demo-017",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T14:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "d41320e42bb43a71f9f7730b2a51ac639eff7f85834043fa44f5c8b7d02cda34",
+      "urlHash": "3cafd69980b27c57490d017c9a7778a2cdb0b7c7f184c6455fd167fbb5d3f3cd",
+      "importanceScore": 57,
+      "status": "published",
+      "isFeatured": true,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "boj",
+          "confidence": 0.95
+        },
+        {
+          "slug": "monetary_policy",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-018",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-018",
+      "title": "国内の消費者物価指数（CPI）が公表 前年同月比の伸びは横ばい",
+      "slug": "20260803-cpi-82b390d8",
+      "summary": "総務省が消費者物価指数を公表しました。",
+      "originalUrl": "https://example.com/economy/articles/demo-018",
+      "canonicalUrl": "https://example.com/economy/articles/demo-018",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T10:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "441be3d057180848a29ad6d43147545b1db47b93ab9532d0dd92f8b771578d02",
+      "urlHash": "82b390d86c1077143434965bcbee871af66fc269c739fa98897c80a724c0e7da",
+      "importanceScore": 21,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "indicators",
+          "confidence": 0.81
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-019",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-019",
+      "title": "長期金利が上昇 国債利回りの動向が株式市場にも波及",
+      "slug": "20260803-news-f904d4cf",
+      "summary": "長期金利の上昇を受け、金利敏感セクターに影響が及びました。",
+      "originalUrl": "https://example.com/economy/articles/demo-019",
+      "canonicalUrl": "https://example.com/economy/articles/demo-019",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T09:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "86f01701fc7ef887e378f36554a6314287c92eee3bffed099db42690d5026aa8",
+      "urlHash": "f904d4cf12fa8e5467177d6c8ef921139fef8ea6cd70bfadf6f381e501048fa9",
+      "importanceScore": 19,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "rates",
+          "confidence": 0.95
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-020",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-020",
+      "title": "為替は円安方向で推移 ドル円は前日比で上昇",
+      "slug": "20260803-news-16cced2f",
+      "summary": "外国為替市場ではドル円が上昇しました。為替は変動します。",
+      "originalUrl": "https://example.com/economy/articles/demo-020",
+      "canonicalUrl": "https://example.com/economy/articles/demo-020",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T07:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "0449e562c3e499cfc2cd09698456072bfcab3449e9442c2333d6a6d46eb4f6af",
+      "urlHash": "16cced2f430e48961004d12b4df17fd46c43dbec3d439dc3db14ae13fa10cdf4",
+      "importanceScore": 17,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "forex",
+          "confidence": 0.95
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-021",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-021",
+      "title": "日銀短観、大企業製造業の業況判断は小幅改善",
+      "slug": "20260802-news-7a26a153",
+      "summary": "日本銀行が全国企業短期経済観測調査を公表しました。",
+      "originalUrl": "https://example.com/economy/articles/demo-021",
+      "canonicalUrl": "https://example.com/economy/articles/demo-021",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T22:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "19d5c707363d573844ab128cb5a59d9da5a3ef640bb911e6ade31665b93ab277",
+      "urlHash": "7a26a1538d9c8cfa9b781593318bffe4da140909d3d46053f47313eb43e52e7e",
+      "importanceScore": 39,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "boj",
+          "confidence": 0.81
+        },
+        {
+          "slug": "indicators",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-022",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "sourceSlug": "demo-global",
+      "externalId": "https://example.com/global/articles/demo-022",
+      "title": "NYダウは反発、ハイテク株中心に買い戻し",
+      "slug": "20260803-ny-6696f677",
+      "summary": "米国市場では主要指数が上昇しました。",
+      "originalUrl": "https://example.com/global/articles/demo-022",
+      "canonicalUrl": "https://example.com/global/articles/demo-022",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T05:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "475017da29aefacbca4bd65f252bef0a1e7c25f8ad113a575cab8fb19cd6e289",
+      "urlHash": "6696f6779b4d7baab2d1c8bb69371634df113909b4bea32f4a5ee211df22e026",
+      "importanceScore": 11,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "us_equity",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-023",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "sourceSlug": "demo-global",
+      "externalId": "https://example.com/global/articles/demo-023",
+      "title": "NASDAQ総合が下落 金利上昇を嫌気した売り",
+      "slug": "20260803-nasdaq-f10b2c73",
+      "summary": "米国のハイテク株中心の指数は下落しました。",
+      "originalUrl": "https://example.com/global/articles/demo-023",
+      "canonicalUrl": "https://example.com/global/articles/demo-023",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T03:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "589e63a26ad8bfe05eaf989e9db81607c85e1427a0243360b8c95a455f644dea",
+      "urlHash": "f10b2c73a8db9d798b8db3252301923898d33884fdf40a9471d326b20ea792f1",
+      "importanceScore": 15,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "rates",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-024",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "sourceSlug": "demo-global",
+      "externalId": "https://example.com/global/articles/demo-024",
+      "title": "FOMCの結果を受け海外市場が変動 日本株への影響に関心",
+      "slug": "20260803-fomc-46ecc5c3",
+      "summary": "米連邦公開市場委員会の結果が公表されました。",
+      "originalUrl": "https://example.com/global/articles/demo-024",
+      "canonicalUrl": "https://example.com/global/articles/demo-024",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T00:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "1a4e31f3a1f6fe892fecd208baa7cb9d3d27b733e9dc17e2a3d3d3e7693f7e2d",
+      "urlHash": "46ecc5c3e11648d7d6c30eeab1df0d469ef0b8dff9b05ebafb3c9841eb9882e5",
+      "importanceScore": 20,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "japan_equity",
+          "confidence": 0.63
+        },
+        {
+          "slug": "us_equity",
+          "confidence": 0.63
+        },
+        {
+          "slug": "global",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-025",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-025",
+      "title": "国内ETFの純資産残高が増加 新NISAの資金流入が継続",
+      "slug": "20260802-etf-nisa-573b4ea9",
+      "summary": "上場投資信託（ETF）の残高が増加しています。",
+      "originalUrl": "https://example.com/market/articles/demo-025",
+      "canonicalUrl": "https://example.com/market/articles/demo-025",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T20:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "9ee3f4bb94b2502437b266aea82f9fa41625c97dc2bb5711493ce8f74d44c1af",
+      "urlHash": "573b4ea91b4bc94b266f50126b51b4f6632c193e826e8708305cbfce456dd6e2",
+      "importanceScore": 11,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "etf",
+          "confidence": 0.81
+        },
+        {
+          "slug": "fund",
+          "confidence": 0.81
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-026",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "sourceSlug": "demo-market",
+      "externalId": "https://example.com/market/articles/demo-026",
+      "title": "J-REIT指数が上昇 分配金利回りに着目した買い",
+      "slug": "20260802-j-reit-e39b7b6c",
+      "summary": "不動産投資信託（REIT）の指数が上昇しました。",
+      "originalUrl": "https://example.com/market/articles/demo-026",
+      "canonicalUrl": "https://example.com/market/articles/demo-026",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T18:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "6f3540f437e41d2378adb1476505ee7ed32ef3cc9c8f96a2c7c70adc9f097f77",
+      "urlHash": "e39b7b6cb3daf3dd79ca88efe93bd2c7bece46338801303695dbceee6d6965bc",
+      "importanceScore": 19,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "reit",
+          "confidence": 0.81
+        },
+        {
+          "slug": "rates",
+          "confidence": 0.63
+        },
+        {
+          "slug": "fund",
+          "confidence": 0.63
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-027",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-027",
+      "title": "投資信託の資金流入が続く つみたて投資枠の利用が拡大",
+      "slug": "20260802-news-d23d4930",
+      "summary": "投資信託への資金流入が継続しています。",
+      "originalUrl": "https://example.com/economy/articles/demo-027",
+      "canonicalUrl": "https://example.com/economy/articles/demo-027",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T16:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "a050cd44e2c2e2897a89fef5262bf3a64678fac843cadd770058197c15790b5d",
+      "urlHash": "d23d4930c3964e44ced14346e93cb590ee126eea2afe42dbf5d79ae0982a9087",
+      "importanceScore": 5,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "fund",
+          "confidence": 0.81
+        }
+      ],
+      "companies": []
+    },
+    {
+      "id": "demo-028",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-028",
+      "title": "サンプル食品、有価証券報告書の訂正報告書を提出",
+      "slug": "20260802-news-a5383f2c",
+      "summary": "サンプル食品は訂正報告書の提出について公表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-028",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-028",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T14:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "e8e80a11e60b13dd1364d12ef60f91bf5b5e338f54a635b0d778767b61f3a280",
+      "urlHash": "a5383f2c9a1a364cdf8b26a0e94214d1f13f452a19a88aa372d41f19bc30cb57",
+      "importanceScore": 25,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "scandal",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9008",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル食品"
+        }
+      ]
+    },
+    {
+      "id": "demo-029",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-029",
+      "title": "サンプル電子が上場廃止基準に抵触するおそれ 監理銘柄に指定",
+      "slug": "20260802-news-3e807324",
+      "summary": "サンプル電子について監理銘柄への指定が公表されました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-029",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-029",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T12:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "e3f07a4e5c0c8950ee3fb8d3faf9ab65a64b7e2e53c6a9f3b561989ac2103cdd",
+      "urlHash": "3e80732466d98f26be8d8032bae875f7e282f9975543433955522e57af4fbeed",
+      "importanceScore": 41,
+      "status": "published",
+      "isFeatured": true,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "delisting",
+          "confidence": 0.81
+        },
+        {
+          "slug": "stocks",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9009",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル電子"
+        }
+      ]
+    },
+    {
+      "id": "demo-030",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "sourceSlug": "demo-company",
+      "externalId": "https://example.com/company/articles/demo-030",
+      "title": "サンプル建設、海外子会社の設立を発表 アジア市場での事業拡大へ",
+      "slug": "20260802-news-c53c9ccc",
+      "summary": "サンプル建設は海外子会社の設立について発表しました。",
+      "originalUrl": "https://example.com/company/articles/demo-030",
+      "canonicalUrl": "https://example.com/company/articles/demo-030",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-02T08:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "457ef42a72dee6e0cbc59e08c6aac0d6402905e970d71ea9e6291801016a890b",
+      "urlHash": "c53c9ccc0435a618493dbede6c01ea5966f896e3ed40c21bc266985df6ef9376",
+      "importanceScore": 4,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "isDemo": true,
+      "categories": [],
+      "companies": [
+        {
+          "code": "9010",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル建設"
+        }
+      ]
+    },
+    {
+      "id": "demo-dup-1",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "sourceSlug": "demo-economy",
+      "externalId": "https://example.com/economy/articles/demo-dup-1",
+      "title": "サンプル・テクノロジーズ、2027年3月期の業績予想を上方修正 営業利益は従来予想を上回る見通し",
+      "slug": "20260803-20273-e24a1560",
+      "summary": "サンプル・テクノロジーズは通期の売上高および営業利益の予想を修正したと発表しました。詳細は配信元の記事をご確認ください。",
+      "originalUrl": "https://example.com/economy/articles/demo-dup-1",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-001",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T23:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "11a2d771bbb49547a2808c2278d0552ae35db9acc60519e9eefb3a59047dc91e",
+      "urlHash": "e24a15609f0bb298445cd9bb6129ce60f5e5281f43cf3a6277cad397d079e163",
+      "importanceScore": 61,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": true,
+      "duplicateOfId": "demo-001",
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "guidance",
+          "confidence": 0.81
+        },
+        {
+          "slug": "earnings",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9001",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・テクノロジーズ"
+        }
+      ]
+    },
+    {
+      "id": "demo-dup-2",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "sourceSlug": "demo-disclosure",
+      "externalId": "https://example.com/disclosure/articles/demo-dup-2",
+      "title": "サンプル・ヘルスケア、期末配当を増配へ 年間配当は前期比で増加",
+      "slug": "20260803-news-0170daa9",
+      "summary": "サンプル・ヘルスケアは剰余金の配当について、期末配当予想の修正を発表しました。",
+      "originalUrl": "https://example.com/disclosure/articles/demo-dup-2",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-002",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T22:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "87f27a321f3247fd94da41004b9f20c2cf1d5c3552c9530e8c6f75f2597e34cb",
+      "urlHash": "0170daa9932cac5412db56b29c45bc6de0a9a17e46899b928581056cb200f582",
+      "importanceScore": 43,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": true,
+      "duplicateOfId": "demo-002",
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "dividend",
+          "confidence": 0.95
+        }
+      ],
+      "companies": [
+        {
+          "code": "9002",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル・ヘルスケア"
+        }
+      ]
+    },
+    {
+      "id": "demo-dup-3",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "sourceSlug": "demo-global",
+      "externalId": "https://example.com/global/articles/demo-dup-3",
+      "title": "サンプル物流システム、自己株式の取得を決議 取得上限は発行済株式総数の一定割合",
+      "slug": "20260803-news-7b880d3f",
+      "summary": "サンプル物流システムは自己株式の取得に係る事項について決議したと発表しました。",
+      "originalUrl": "https://example.com/global/articles/demo-dup-3",
+      "canonicalUrl": "https://example.com/disclosure/articles/demo-003",
+      "imageUrl": null,
+      "authorName": null,
+      "publishedAt": "2026-08-03T21:00:00.000Z",
+      "externalUpdatedAt": null,
+      "fetchedAt": "2026-08-03T23:48:00.000Z",
+      "language": "ja",
+      "contentHash": "153a71b6b21fdb8c2dc6774ab7f4c547452176ee33f9bc04119aeb60b2dcae5e",
+      "urlHash": "7b880d3fdce37413d3e3cb1ce0c0a085676c63895ba9fdb54cb71cad30f72377",
+      "importanceScore": 35,
+      "status": "published",
+      "isFeatured": false,
+      "isBreaking": false,
+      "isDuplicate": true,
+      "duplicateOfId": "demo-003",
+      "isDemo": true,
+      "categories": [
+        {
+          "slug": "buyback",
+          "confidence": 0.63
+        }
+      ],
+      "companies": [
+        {
+          "code": "9003",
+          "matchType": "security_code",
+          "confidence": 0.95,
+          "name": "サンプル物流システム"
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "id": "demo-log-1",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "startedAt": "2026-08-03T23:36:00.000Z",
+      "completedAt": "2026-08-03T23:39:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 3,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-2",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "startedAt": "2026-08-03T23:06:00.000Z",
+      "completedAt": "2026-08-03T23:09:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-3",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "startedAt": "2026-08-03T22:36:00.000Z",
+      "completedAt": "2026-08-03T22:39:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-4",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "startedAt": "2026-08-03T22:06:00.000Z",
+      "completedAt": "2026-08-03T22:09:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-5",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "startedAt": "2026-08-03T21:36:00.000Z",
+      "completedAt": "2026-08-03T21:39:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-6",
+      "sourceId": "demo-market",
+      "sourceName": "サンプル市況ニュース",
+      "startedAt": "2026-08-03T21:06:00.000Z",
+      "completedAt": "2026-08-03T21:09:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-7",
+      "sourceId": "demo-company",
+      "sourceName": "サンプル企業ニュース",
+      "startedAt": "2026-08-03T20:36:00.000Z",
+      "completedAt": "2026-08-03T20:39:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-8",
+      "sourceId": "demo-economy",
+      "sourceName": "サンプル経済ニュース",
+      "startedAt": "2026-08-03T20:06:00.000Z",
+      "completedAt": "2026-08-03T20:09:00.000Z",
+      "status": "error",
+      "httpStatus": 503,
+      "itemsReceived": 0,
+      "itemsCreated": 0,
+      "itemsUpdated": 0,
+      "itemsSkipped": 0,
+      "errorMessage": "配信元が一時的に応答しませんでした（デモ）"
+    },
+    {
+      "id": "demo-log-9",
+      "sourceId": "demo-disclosure",
+      "sourceName": "サンプル適時開示",
+      "startedAt": "2026-08-03T19:36:00.000Z",
+      "completedAt": "2026-08-03T19:39:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    },
+    {
+      "id": "demo-log-10",
+      "sourceId": "demo-global",
+      "sourceName": "サンプル海外市場ニュース",
+      "startedAt": "2026-08-03T19:06:00.000Z",
+      "completedAt": "2026-08-03T19:09:00.000Z",
+      "status": "success",
+      "httpStatus": 200,
+      "itemsReceived": 12,
+      "itemsCreated": 1,
+      "itemsUpdated": 1,
+      "itemsSkipped": 8,
+      "errorMessage": null
+    }
+  ]
+}

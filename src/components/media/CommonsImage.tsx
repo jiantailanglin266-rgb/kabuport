@@ -15,6 +15,7 @@ export function CommonsImage({
   overlay = "gradient",
   priority = false,
   credit = "corner",
+  linkCredit = true,
 }: {
   image: CommonsImageMeta;
   alt: string;
@@ -25,6 +26,12 @@ export function CommonsImage({
   priority?: boolean;
   /** 帰属表示の出し方。corner=画像内の隅、below=画像下 */
   credit?: "corner" | "below";
+  /**
+   * 帰属表示をリンクにするか。
+   * 画像自体がリンク（カード全体がLink）の内側で使う場合は false にする。
+   * a要素の入れ子はHTMLとして不正で、ハイドレーションエラーになるため。
+   */
+  linkCredit?: boolean;
 }) {
   const overlayCls =
     overlay === "strong"
@@ -50,14 +57,21 @@ export function CommonsImage({
 
       {credit === "corner" ? (
         <figcaption className="pointer-events-none absolute bottom-1.5 right-2 z-10 max-w-[92%] truncate text-[9px] leading-none text-white/55">
-          <a
-            href={image.descriptionUrl}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="pointer-events-auto hover:text-white/90 hover:underline"
-          >
-            {image.artist} / {image.license}
-          </a>
+          {linkCredit ? (
+            <a
+              href={image.descriptionUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="pointer-events-auto hover:text-white/90 hover:underline"
+            >
+              {image.artist} / {image.license}
+            </a>
+          ) : (
+            // リンクの内側では a を入れ子にできないため、テキストのみで帰属表示する
+            <span>
+              {image.artist} / {image.license}
+            </span>
+          )}
         </figcaption>
       ) : (
         <figcaption className="mt-1.5 text-[10.5px] text-muted">

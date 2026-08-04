@@ -202,6 +202,75 @@ npm run data:validate # 検証のみ
 - 無料プランは配信遅延があります（本サイトは非リアルタイムを明示済み）。リアルタイム株価は有料ライセンスが必要です。
 - ローカル確認: `JQUANTS_REFRESH_TOKEN=... npm run fetch:data` → `npm run dev`
 
+## ニュース機能（RSS自動取得）
+
+`/[locale]/news` に株式投資ニュースの一覧・詳細・カテゴリー別・配信元別・企業別ページを実装しています。
+
+> **本サイトは静的サイト（GitHub Pages）です。** DB・APIルート・Vercel Cron は使えないため、
+> RSS取得は **GitHub Actions のスケジュール実行**（Cron相当）で行い、結果を `public/data/news/*.json` に保存します。
+> **ブラウザからRSSを取得することはなく、フィードURL等はサーバー側（Actions Secrets）にのみ存在します。**
+
+### RSSソースの追加方法
+GitHub → Settings → Secrets and variables → Actions に登録します（コードにURLを直書きしません）。
+
+| Secret | 用途 |
+|---|---|
+| `RSS_FEED_MARKET_1` / `RSS_FEED_MARKET_2` | 市況フィード |
+| `RSS_FEED_COMPANY_1` | 企業ニュース |
+| `RSS_FEED_ECONOMY_1` | 経済ニュース |
+| `RSS_FEED_DISCLOSURE_1` | 適時開示 |
+
+任意の追加設定（`<KEY>` は上記のキー名）:
+`<KEY>_NAME`（表示名）/ `<KEY>_SITE`（サイトURL）/ `<KEY>_TRUST`（1-5）/
+`<KEY>_IMAGE_OK=true`（**画像の利用条件を確認できた場合のみ**）/ `<KEY>_COMMERCIAL_OK=true` / `<KEY>_TERMS`（規約メモ）
+
+### RSSソースの停止方法
+- 一時停止: 対象の Secret を削除（または空に）する
+- 自動停止: **連続エラーが5回を超えたフィードは自動的にスキップ**され、ログに `paused` が記録されます
+
+### Cron（定期取得）の設定
+`.github/workflows/update-market-data.yml` のスケジュールで実行されます（JST 06:00 / 平日18:30 / 土07:00）。
+**手動取得**: GitHub → Actions → *Update market data and deploy* → **Run workflow**
+
+### ローカルでの実行
+```bash
+npm run news:demo    # デモデータを再生成（架空企業のサンプル記事）
+npm run news:fetch   # RSS取得（フィード未設定ならデモデータを出力）
+```
+
+### 取得ログの確認
+`public/data/news/logs.json`（HTTPステータス / 受信件数 / 新規 / スキップ / エラー内容 / 連続エラー回数）。
+配信元ページ（`/news/source/<slug>`）にも最終取得成功日時と利用条件を表示します。
+
+### 辞書の更新方法
+- **カテゴリー辞書**: `src/data/news-category-keywords.json`（カテゴリー名・キーワード・重要度の重み）
+- **企業名辞書**: `src/data/companies.json` の社名・カナ・英名から自動生成（`scripts/fetch-rss.mjs` の `buildCompanyDictionary`）
+
+### デモデータの切り替え
+フィードが未設定の場合は自動的にデモデータになります（画面に「デモデータ」と明示）。
+デモは**すべて架空企業（証券コード9001–9010）**で、実在企業の架空ニュースは作りません。
+
+### 重複判定の方法
+GUID → 元記事URL → canonical → URL正規化後 → URLハッシュ → 正規化タイトル → contentハッシュ → タイトル類似度（文字バイグラム）の順。
+**タイトル類似のみでの統合は、関連銘柄が矛盾しない場合に限ります**（「A社が上方修正」と「B社が上方修正」を統合しないため）。
+重複は物理削除せず `isDuplicate` / `duplicateOfId` で代表記事へ紐付け、詳細ページに「同じニュースを報じた他の配信元」として表示します。
+
+### セキュリティ
+SSRF対策（localhost・プライベートIP・リンクローカル・クラウドメタデータの拒否／リダイレクト先も毎回検証）、
+プロトコル制限（http/httpsのみ）、タイムアウト、レスポンスサイズ上限、記事件数上限、
+HTMLサニタイズ（script/iframe/イベントハンドラ除去）、不正画像URLの除去。
+
+### 著作権・利用条件（公開前に必ず確認）
+- **記事全文は保存も転載もしません**（タイトル・短い概要・配信元・元記事リンクのみ。概要は既定220文字で切り詰め）
+- 元記事へのリンクと配信元名を必ず表示します
+- **画像は `*_IMAGE_OK=true` を設定した配信元のみ表示**します（未確認の画像は掲載しない）
+- 商用利用が禁止されているフィードは使用しないでください
+- 元記事のスクレイピングは行いません（robots.txt回避も実装していません）
+- 配信停止の依頼を受けた場合は、該当 Secret を削除して再実行してください
+
+**公開前チェック**: 各フィードの利用規約で「RSSの二次利用可否」「商用サイトでの表示可否」「画像利用」「リンク方法の指定」を確認し、
+`<KEY>_TERMS` にメモを残してください。未確認の項目は既定で「未確認」として表示されます。
+
 ## 動画ライブラリ（YouTube・現在はモック）
 
 `/[locale]/videos` に動画ライブラリを実装しています。現在は **`src/data/videos.json` のモックデータ**で動作し、動画・チャンネル名・再生回数はすべて架空のサンプルです（実在の動画とは紐づきません）。
