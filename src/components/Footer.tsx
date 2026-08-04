@@ -47,6 +47,7 @@ export function Footer({ locale }: { locale: Locale }) {
         { label: ja ? "会社概要" : "About us", href: `${about}#company` },
         { label: ja ? "編集方針" : "Editorial policy", href: `${about}#editorial` },
         { label: ja ? "データの取り扱い" : "Data policy", href: `${b}/data` },
+        { label: ja ? "画像クレジット" : "Image credits", href: `${b}/credits` },
         { label: ja ? "情報源" : "Data sources", href: `${about}#sources` },
         { label: ja ? "広告・アフィリエイト開示" : "Ad disclosure", href: `${about}#disclosure` },
         { label: ja ? "訂正ポリシー" : "Corrections", href: `${about}#correction` },

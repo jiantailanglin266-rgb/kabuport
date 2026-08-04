@@ -11,6 +11,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MetricCard } from "@/components/MetricCard";
 import { StockCard } from "@/components/StockCard";
 import { JsonLd } from "@/components/JsonLd";
+import { getSectorImage } from "@/lib/images";
+import { CommonsImage } from "@/components/media/CommonsImage";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) => listIndustries().map((i) => ({ locale, code: i.code })));
@@ -33,6 +35,7 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
   const ind = listIndustries().find((i) => i.code === code);
   if (!ind) notFound();
   const name = pick(loc, ind.nameJa, ind.nameEn);
+  const sectorImage = getSectorImage(code);
   const stocks = getStocksByIndustry(code).sort((a, b) => b.quote.marketCap - a.quote.marketCap);
   const agg = aggregateSector(stocks);
 
@@ -40,10 +43,29 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
     <div className="space-y-6">
       <JsonLd data={breadcrumbLd([{ name: t.brand, path: "" }, { name: loc === "ja" ? "業種" : "Industries", path: "industries" }, { name, path: `industries/${code}` }], loc)} />
       <Breadcrumbs items={[{ name: t.brand, path: "" }, { name: loc === "ja" ? "業種" : "Industries", path: "industries" }, { name, path: `industries/${code}` }]} locale={loc} />
-      <div>
-        <h1 className="text-2xl font-bold text-ink">{name}</h1>
-        <p className="mt-1 text-sm text-muted">{pick(loc, ind.descriptionJa, ind.descriptionEn)}</p>
-      </div>
+      {/* 業種ヘッダー（自由ライセンス画像・帰属表示つき） */}
+      {sectorImage ? (
+        <div className="relative overflow-hidden rounded-3xl">
+          <CommonsImage
+            image={sectorImage}
+            alt={`${name}${loc === "ja" ? "のイメージ写真" : " illustrative photo"}`}
+            className="h-52 w-full sm:h-64"
+            overlay="strong"
+            priority
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <h1 className="text-[26px] font-extrabold tracking-tight text-white sm:text-[32px]">{name}</h1>
+            <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-white/75">
+              {pick(loc, ind.descriptionJa, ind.descriptionEn)}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h1 className="text-2xl font-bold text-ink">{name}</h1>
+          <p className="mt-1 text-sm text-muted">{pick(loc, ind.descriptionJa, ind.descriptionEn)}</p>
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <MetricCard label={loc === "ja" ? "銘柄数" : "Stocks"} value={`${agg.count}`} />
         <MetricCard label={loc === "ja" ? "時価総額合計" : "Total mkt cap"} value={formatYenCompact(agg.totalMarketCap, loc)} />

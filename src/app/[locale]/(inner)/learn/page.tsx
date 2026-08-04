@@ -7,6 +7,8 @@ import { buildMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import articlesRaw from "@/data/articles.json";
 import pathsRaw from "@/data/learning-paths.json";
+import { getImage } from "@/lib/images";
+import { CommonsImage } from "@/components/media/CommonsImage";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -19,10 +21,32 @@ export default async function LearnPage({ params }: { params: Promise<{ locale: 
   if (!isLocale(locale)) notFound();
   const loc = locale as Locale;
   const t = getDictionary(loc);
+  const learnImage = getImage("site:learn");
   return (
     <div className="space-y-6">
       <Breadcrumbs items={[{ name: t.brand, path: "" }, { name: t.nav.learn, path: "learn" }]} locale={loc} />
-      <h1 className="text-2xl font-bold text-ink">{t.nav.learn}</h1>
+
+      {learnImage ? (
+        <div className="relative overflow-hidden rounded-3xl">
+          <CommonsImage
+            image={learnImage}
+            alt={loc === "ja" ? "学習コンテンツのイメージ写真" : "Illustrative photo for learning content"}
+            className="h-44 w-full sm:h-56"
+            overlay="strong"
+            priority
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <h1 className="text-[26px] font-extrabold tracking-tight text-white sm:text-[30px]">{t.nav.learn}</h1>
+            <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed text-white/75">
+              {loc === "ja"
+                ? "指標の読み方から制度の基礎まで、順番に学べるコンテンツを用意しています。"
+                : "Step-by-step content from reading metrics to understanding the rules."}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <h1 className="text-2xl font-bold text-ink">{t.nav.learn}</h1>
+      )}
 
       <div className="flex flex-wrap gap-2">
         <Link href={`/${loc}/paths`} className="rounded-full border border-line bg-card px-4 py-2 text-sm text-ink hover:border-brand">{loc === "ja" ? "学習ロードマップ" : "Learning paths"}</Link>

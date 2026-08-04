@@ -18,7 +18,8 @@
     "data:edinet": "node scripts/fetch-edinet-documents.mjs",
     "data:build": "node scripts/build-market-data.mjs",
     "data:validate": "node scripts/validate-market-data.mjs",
-    "data:all": "npm run data:listed && npm run data:prices && npm run data:financials && npm run data:edinet && npm run data:build && npm run data:validate"
+    "data:all": "npm run data:listed && npm run data:prices && npm run data:financials && npm run data:edinet && npm run data:build && npm run data:validate",
+    "data:images": "node scripts/fetch-commons-images.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

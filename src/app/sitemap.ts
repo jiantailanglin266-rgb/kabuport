@@ -11,7 +11,7 @@ import brokersRaw from "@/data/brokers.json";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "stocks", "spotlight", "signals", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "brokers", "videos", "learn", "paths", "glossary", "experts", "data", "about"];
+  const staticPaths = ["", "stocks", "spotlight", "signals", "compare", "rankings", "industries", "themes", "dividends", "benefits", "earnings", "brokers", "videos", "learn", "paths", "glossary", "experts", "data", "credits", "about"];
   const codes = listAllCodes();
   const slugs = articlesRaw.map((a) => a.slug);
   const industryCodes = listIndustries().map((i) => i.code);
